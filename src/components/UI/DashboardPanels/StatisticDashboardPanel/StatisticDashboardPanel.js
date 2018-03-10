@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Spin, Row, Col, Icon } from 'antd';
 import './StatisticDashboardPanel.css';
 
-const dashboardPanel = (props) => {
+const statisticDashboardPanel = (props) => {
     return (
         <div className="StatisticDashboardPanel" style={{backgroundColor: props.bgColor}}>
             <Row>
@@ -30,18 +30,18 @@ const dashboardPanel = (props) => {
     );
 }
 
-dashboardPanel.defaultProps = {
+statisticDashboardPanel.defaultProps = {
     caption: "Unnamed Panel",
     bgColor: "5d9cec",
     icon: "solution",
     loading: false
 }
 
-dashboardPanel.propTypes = {
+statisticDashboardPanel.propTypes = {
     caption: PropTypes.string,
     bgColor: PropTypes.string,
     icon: PropTypes.string,
     loading: PropTypes.bool
 }
 
-export default dashboardPanel;
+export default statisticDashboardPanel;

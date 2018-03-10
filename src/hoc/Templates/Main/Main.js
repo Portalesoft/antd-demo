@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Layout, Menu, Icon, Row, Col } from 'antd';
 import Logo from '../../../components/Logo/Logo';
 import Dashboard from '../../../containers/Dashboard/Dashboard';
+import Toolbar from '../../../components/Navigation/Toolbar/Toolbar';
 import * as actions from '../../../store/actions';
 import './Main.css';
 
@@ -76,15 +77,9 @@ class Main extends Component {
                     </Sider>
                 <Layout>
                     <Header style={{padding: 0}}>
-                        <Menu 
-                            theme='light'
-                            mode='horizontal'
-                            onClick={this.appMenuItemSelected}
-                            style={{ lineHeight: '64px' }}>                            
-                                <Menu.Item key='4' style={{float: 'right'}}><span>LOGOUT</span></Menu.Item>
-                        </Menu>
+                        <Toolbar title="React Ant Design Demo" />
                     </Header>                            
-                    <Content style={{ marginTop: '2px', overflow: 'auto' }}>
+                    <Content style={{ overflow: 'auto' }}>
                         <Dashboard />
                     </Content>
                 </Layout>                

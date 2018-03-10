@@ -1,10 +1,12 @@
 import React from 'react';
+import ToolbarItems from './ToolbarItems/ToolbarItems'; 
+import './Toolbar.css';
 
-const appBar = (props) => {
-    return (
-        <div className="">
-        </div>
-    );
-}
+const toolbar = (props) => (
+    <div className="Toolbar">
+        <ToolbarItems />
+        <span className="Title">{props.title}</span>
+    </div>
+);
 
-export default appBar;
+export default toolbar;

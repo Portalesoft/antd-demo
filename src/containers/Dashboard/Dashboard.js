@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 import ChartDashboardPanel from './DashboardPanels/ChartDashboardPanel';
 import StatisticDashboardPanel from '../../components/UI/DashboardPanels/StatisticDashboardPanel/StatisticDashboardPanel';
+import ProgressDashboardPanel from '../../components/UI/DashboardPanels/ProgressDashboardPanel/ProgressDashboardPanel';
 
 import * as actions from '../../store/actions';
 import './Dashboard.css';
@@ -20,7 +21,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="Dashboard">
-                <Row gutter={16}>
+                <Row type="flex" gutter={16}>
                     <Col span={24} sm={{ span: 8 }}>
                         <StatisticDashboardPanel caption="Open Tickets" value="24" icon="solution" bgColor="#5d9cec" />
                     </Col>
@@ -31,11 +32,19 @@ class Dashboard extends Component {
                         <StatisticDashboardPanel caption="Urgent Tickets" value="4" icon="exception" bgColor="#7266ba" />
                     </Col>       
                 </Row>            
-                <Row gutter={16}>
-                    <Col span={24} sm={{ span: 12 }}>
+                <Row type="flex" gutter={16}>
+                    <Col span={24} sm={{ span: 8 }}>
+                        <ProgressDashboardPanel caption="4 Hour Response %" description="This Week: 278 Support Calls" value={72} />
+                    </Col>
+                    <Col span={24} sm={{ span: 16 }}>
                         <ChartDashboardPanel heading="Support Calls Over Time" data={this.props.supportCallsChartData} loading={this.props.supportCallsChartDataLoading} />
                     </Col>
-                    <Col span={24} sm={{ span: 12 }}>
+                </Row>
+                <Row type="flex" gutter={16}>
+                    <Col span={24} sm={{ span: 8 }}>
+                        <ProgressDashboardPanel caption="7 Day Solved %" description="This Week: 154 Support Tickets" value={58} />
+                    </Col>
+                    <Col span={24} sm={{ span: 16 }}>
                         <ChartDashboardPanel heading="Tickets Over Time" data={this.props.ticketsChartData} loading={this.props.ticketsChartDataLoading} />
                     </Col>
                 </Row>

@@ -1,0 +1,47 @@
+.ToolbarItems {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: row;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.ToolbarItems li {
+    padding: 0px 15px 0;
+}
+
+.ToolbarItems li:hover {
+    cursor: pointer;
+} 
+
+.ToolbarItems .move-up  {
+    margin-top: -3px;
+}
+
+.ActionsPopover .ant-popover-arrow, .ActionsPopover .ant-popover-inner {
+    margin-top: -13px;
+    background: #B6D4FA;
+}
+
+.Actions .ant-card-head {
+    background-color: #3A84E2;
+}
+
+.AlertsPopover .ant-popover-arrow, .AlertsPopover .ant-popover-inner {
+    margin-top: -13px;
+    background: #C7C1EC;
+}
+
+.Alerts .ant-card-head {
+    background-color: #5447A2;
+}
+
+.Actions .ant-card-head-title, .Alerts .ant-card-head-title {
+    color: white;
+}
+
+.Actions .ant-card-bordered, .Alerts .ant-card-bordered  {
+    border: none;
+}
