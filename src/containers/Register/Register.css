@@ -1,0 +1,39 @@
+.Register {
+    box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+    width: 85%;
+    margin: 50px auto;
+    max-width: 500px;
+    background-color: white;
+    box-sizing: border-box;
+    overflow: visible;
+  }
+  
+  .Register .Header {
+      color: #fff;
+      font-size: 24px;
+      font-weight: normal;
+      padding: 12px 0;
+      text-align: center;
+      background: #6498fe;
+  }
+
+  .Register Form {
+    padding: 24px;
+}
+  
+  .Register .ant-form-item {
+      margin-bottom: 0px;
+  }
+
+  @media (max-width: 576px) {
+    .Register .ant-col-xs-24.ant-form-item-label {
+        padding: 0;
+    }
+  }
+
+  @media (min-width: 576px) {
+    .Register {
+        margin: 100px auto;
+        width: 70%;
+    }
+  }

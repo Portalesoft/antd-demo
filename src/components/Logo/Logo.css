@@ -1,0 +1,9 @@
+.Logo {
+    margin: 0 15px;
+    display: inline-block;
+}
+
+.Logo img {
+    height: 30px;
+    width: auto;
+}

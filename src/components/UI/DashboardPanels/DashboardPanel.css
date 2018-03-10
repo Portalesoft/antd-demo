@@ -1,0 +1,33 @@
+.DashboardPanel {
+    padding: 1rem;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px;
+}
+
+.DashboardPanel .Header {
+    line-height: 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.DashboardPanel h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333743;
+    line-height: 1;
+    text-overflow: ellipsis;
+}
+
+.DashboardPanel .Loading {
+    margin-left: 0.5rem;
+}
+
+.DashboardPanel .Content {
+    padding-top: 1rem;
+}
+
+@media(max-width: 576px) {
+    .DashboardPanel .Content {
+        padding-top: 0.25rem;
+    }
+}

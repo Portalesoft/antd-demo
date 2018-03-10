@@ -1,0 +1,28 @@
+.Login {
+  width: 80%;
+  margin: 100px auto;
+  width: 300px;
+  background-color: white;
+  box-sizing: border-box;
+  box-shadow: 0 3px 6px 0px rgba(0,0,0,0.16), 0 3px 6px 0px rgba(0,0,0,0.23);
+}
+
+.Login .Header {
+    color: #fff;
+    font-size: 34px;
+    font-weight: normal;
+    padding: 24px 0;
+    text-align: center;
+    background: #6498fe;
+}
+
+.Login form {
+    padding: 24px;
+}
+
+@media (min-width: 576px) {
+    .Login {
+        max-width: 400px;
+        width: 60%;
+    }
+}

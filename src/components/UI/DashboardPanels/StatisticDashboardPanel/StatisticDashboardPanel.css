@@ -1,0 +1,37 @@
+.StatisticDashboardPanel {
+    padding: 1rem;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 6px;
+}
+
+.StatisticDashboardPanel .Header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.StatisticDashboardPanel h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: white;
+    text-overflow: ellipsis;
+}
+
+.StatisticDashboardPanel .Loading {
+    margin-left: 0.5rem;
+}
+
+.StatisticDashboardPanel .Content {
+    padding-top: 0.4rem;
+}
+
+.StatisticDashboardPanel .NumberDisplay .Value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+@media(max-width: 576px) {
+    .StatisticDashboardPanel .Content {
+        padding-top: 0.25rem;
+    }
+}
