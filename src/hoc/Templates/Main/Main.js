@@ -4,6 +4,7 @@ import { Layout, Menu, Icon, Row, Col } from 'antd';
 import Logo from '../../../components/Logo/Logo';
 import Dashboard from '../../../containers/Dashboard/Dashboard';
 import Toolbar from '../../../components/Navigation/Toolbar/Toolbar';
+import * as menuItems from '../../../components/Navigation/Menu/menuItems'
 import * as actions from '../../../store/actions';
 import './Main.css';
 
@@ -13,7 +14,8 @@ const { SubMenu } = Menu;
 class Main extends Component {
 
     state = {
-        collapsed: false
+        collapsed: false,
+        openKeys: ['dashboards']
     };
 
     toggle = () => {
@@ -22,10 +24,12 @@ class Main extends Component {
         });
     }
 
-    appMenuItemSelected = (item, key, keyPath) => {
-        this.props.onLogout();
+    onClickMenuHandler = ({ item, key, selectedKeys }) => {
+        if (key === menuItems.MENU_LOGOUT) {
+            this.props.onLogout();
+        }
     }
-
+    
     render() {
 
         let brand = 
@@ -38,46 +42,57 @@ class Main extends Component {
                 </Col>
             </Row>   
 
-        let navigationOne =   
-            <Menu.Item key="sub3">
-                <Icon type="mail" />
-                { this.state.collapsed ? null : 'Navigation One'}
-            </Menu.Item>
+        // Not using the navigation one menu in the demo anymore but leaving in as required a tweak 
+        // for mobile when the menu collapses in order to remove the text from the displayed menu
+        // let navigationOne =   
+        //     <Menu.Item key="sub3">
+        //         <Icon type="mail" />
+        //         { this.state.collapsed ? null : 'Navigation One'}
+        //     </Menu.Item>
+        // Collapse check:
+        // navigationOne = <SubMenu key="sub3" title={<span><Icon type="mail" /><span>Navigation One</span></span>}></SubMenu>
 
         if (this.state.collapsed) {
             brand = <Icon style={{color: 'white', paddingLeft: '32px'}} className='trigger' type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle}/>
-            navigationOne = <SubMenu key="sub3" title={<span><Icon type="mail" /><span>Navigation One</span></span>}></SubMenu>
         }
+
         return (
             <Layout style={{height:'100vh'}}>
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                     {brand}
                     <Menu
                         defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
                         mode='inline'
                         theme='dark'
                         inlineIndent='16'>
-                        {navigationOne}
-                        <SubMenu key="sub1" title={<span><Icon type="appstore" /><span>Navigation Two</span></span>}>
-                            <Menu.Item key="3">Option 3</Menu.Item>
-                            <Menu.Item key="4">Option 4</Menu.Item>
-                            <SubMenu key="sub1-2" title="Submenu">
-                            <Menu.Item key="5">Option 5</Menu.Item>
-                            <Menu.Item key="6">Option 6</Menu.Item>
+                            <SubMenu key="dashboards" title={<span><Icon type="line-chart" /><span>Dashboards</span></span>}>
+                                <Menu.Item key="1">Support</Menu.Item>
                             </SubMenu>
-                        </SubMenu>
-                        <SubMenu key="sub2" title={<span><Icon type="setting" /><span>Navigation Three</span></span>}>
-                            <Menu.Item key="7">Option 7</Menu.Item>
-                            <Menu.Item key="8">Option 8</Menu.Item>
-                            <Menu.Item key="9">Option 9</Menu.Item>
-                            <Menu.Item key="10">Option 10</Menu.Item>
-                        </SubMenu>
+                            <SubMenu key="order" title={<span><Icon type="book" /><span>Order</span></span>}>
+                                <Menu.Item key="11">Confirmation</Menu.Item>
+                                <Menu.Item key="12">Production Check</Menu.Item>
+                                <Menu.Item key="13">Shipment Request</Menu.Item>
+                            </SubMenu>
+                            <SubMenu key="packaging" title={<span><Icon type="gift" /><span>Packaging</span></span>}>
+                                <Menu.Item key="21">Confirmation</Menu.Item>
+                                <Menu.Item key="22">Approval</Menu.Item>
+                                <Menu.Item key="23">Documentation</Menu.Item>
+                                <SubMenu key="packaging-admin" title="Admin">
+                                    <Menu.Item key="231">Carton Matrix</Menu.Item>
+                                    <Menu.Item key="232">User Management</Menu.Item>
+                                    <Menu.Item key="233">Catalog</Menu.Item>
+                                </SubMenu>
+                            </SubMenu>
+                            <SubMenu key="demo" title={<span><Icon type="info-circle-o" /><span>Demo</span></span>}>
+                                <SubMenu key="demo-forms" title="Forms">
+                                        <Menu.Item key="233">Work in Progress</Menu.Item>
+                                    </SubMenu>
+                                </SubMenu>
                         </Menu>
                     </Sider>
                 <Layout>
                     <Header style={{padding: 0}}>
-                        <Toolbar title="React Ant Design Demo" />
+                        <Toolbar title="React Ant Design Demo" menuHandler={this.onClickMenuHandler}/>
                     </Header>                            
                     <Content style={{ overflow: 'auto' }}>
                         <Dashboard />

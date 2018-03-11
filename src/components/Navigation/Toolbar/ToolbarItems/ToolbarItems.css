@@ -20,28 +20,35 @@
     margin-top: -3px;
 }
 
-.ActionsPopover .ant-popover-arrow, .ActionsPopover .ant-popover-inner {
-    margin-top: -13px;
-    background: #B6D4FA;
+.ProfilePopover {
+    min-width: 250px;
 }
 
-.Actions .ant-card-head {
+.ProfilePopover .ant-menu-inline {
+    border: none;
+}
+
+.ActionsPopover .ant-popover-inner-content, 
+.AlertsPopover .ant-popover-inner-content, 
+.ProfilePopover .ant-popover-inner-content {
+    padding: 0;
+}
+
+.ActionsPopover .ant-popover-arrow, .ActionsPopover .ant-popover-inner,
+.AlertsPopover .ant-popover-arrow, .AlertsPopover .ant-popover-inner,
+.ProfilePopover .ant-popover-arrow, .ProfilePopover .ant-popover-inner {
+    margin-top: -13px;
+    background: #3A84E2;
+}
+
+.Actions .ant-card-head, .Alerts .ant-card-head, .Profile .ant-card-head {
     background-color: #3A84E2;
 }
 
-.AlertsPopover .ant-popover-arrow, .AlertsPopover .ant-popover-inner {
-    margin-top: -13px;
-    background: #C7C1EC;
-}
-
-.Alerts .ant-card-head {
-    background-color: #5447A2;
-}
-
-.Actions .ant-card-head-title, .Alerts .ant-card-head-title {
+.Actions .ant-card-head-title, .Alerts .ant-card-head-title, .Profile .ant-card-head-title {
     color: white;
 }
 
-.Actions .ant-card-bordered, .Alerts .ant-card-bordered  {
+.Actions .ant-card-bordered, .Alerts .ant-card-bordered, .Profile .ant-card-bordered {
     border: none;
 }

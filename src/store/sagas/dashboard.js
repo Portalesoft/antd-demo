@@ -2,6 +2,10 @@ import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import * as actions from '../actions';
 
+const randomIntFromInterval = (min,max) =>{
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 export function* dashboardTicketsSaga() {
 
     while (true) {
@@ -42,9 +46,35 @@ export function* dashboardSupportCallsSaga() {
                 color: colors[index]
             });
         });
+        yield call(delay, 6000);
         yield put(actions.dashboardUpdateSupportCallsChart(values));
-        yield call(delay, 8000);
     }
 
 }
 
+export function* dashboardProgressSaga() {
+
+    while (true) {
+        const values = {
+            response: randomIntFromInterval(58,83),
+            solved: randomIntFromInterval(45,72)
+        };
+        yield call(delay, 7000);
+        yield put(actions.dashboardUpdateProgress(values));
+    }
+
+}
+
+export function* dashboardStatisticsSaga() {
+
+    while (true) {
+        const values = {
+            openTickets: randomIntFromInterval(10,43),
+            ticketsToday: randomIntFromInterval(5,27),
+            urgentTickets: randomIntFromInterval(1,16)
+        };
+        yield call(delay, 8000);
+        yield put(actions.dashboardUpdateStatistics(values));
+    }
+
+}

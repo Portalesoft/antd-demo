@@ -12,11 +12,11 @@ const FormItem = Form.Item;
 
 class Login extends Component {
     
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.form.validateFields((error, values) => {
+          if (!error) {
+            console.log('Received values of login form: ', values);
             this.props.onLogin(values.email, values.password);
           }
         });
@@ -60,7 +60,7 @@ class Login extends Component {
                         <Button type="primary" disabled={this.props.isAuthenticating} htmlType="submit" style={{width: '100%'}}>
                             Login
                         </Button>                    
-                    </FormItem>       
+                    </FormItem>   
                 </Form>
             </div>
         );

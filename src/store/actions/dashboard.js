@@ -25,3 +25,17 @@ export const dashboardUpdateSupportCallsChart = (values) => {
         values: values
     };
 };
+
+export const dashboardUpdateStatistics = (values) => {
+    return {
+        type: actionTypes.DASHBOARD_UPDATE_STATISTICS,
+        values: values
+    };
+};
+
+export const dashboardUpdateProgress = (values) => {
+    return {
+        type: actionTypes.DASHBOARD_UPDATE_PROGRESS,
+        values: values
+    };
+};

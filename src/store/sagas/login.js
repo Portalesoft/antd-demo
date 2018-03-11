@@ -18,7 +18,7 @@ export function* loginSaga(action) {
 
         // Axios post returns a promise, yield is not exposed by redux saga but is a next gen js feature connected to generators
         // By using yield the post no longer returns a promise but waits for the promise to resolve or reject, the value being stored in the response
-        const response = yield axios.post('/verifyPassword?key=AIzaSyCeVGTkW3M93fdBFNSCUa9UjIG0l_e-F1s', loginCredentials);
+        const response = yield axios.post('/verifyPassword?key=AIzaSyCn5-4vBc4m-ix5upyBoj2_mt_rLxgZRRA', loginCredentials);
         if (response) {
 
             // Firebase also returns a refreshToken, which can be passed with api calls in order to update the api token automatically

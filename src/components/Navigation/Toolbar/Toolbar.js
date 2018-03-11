@@ -4,7 +4,7 @@ import './Toolbar.css';
 
 const toolbar = (props) => (
     <div className="Toolbar">
-        <ToolbarItems />
+        <ToolbarItems menuHandler={props.menuHandler}/>
         <span className="Title">{props.title}</span>
     </div>
 );

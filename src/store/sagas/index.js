@@ -1,12 +1,17 @@
 import { takeEvery, take, fork, cancel, all } from 'redux-saga/effects'; 
 import { loginSaga, loginCheckStatusSaga, logoutSaga } from './login';
-import { dashboardTicketsSaga, dashboardSupportCallsSaga } from './dashboard';
+import { registerSaga } from './register';
+import { dashboardTicketsSaga, dashboardSupportCallsSaga, dashboardProgressSaga, dashboardStatisticsSaga } from './dashboard';
 import * as actionTypes from '../actions/actionTypes';
 
 export function* watchLogin() {
     yield takeEvery(actionTypes.LOGIN_USER, loginSaga);
     yield takeEvery(actionTypes.LOGIN_CHECK_STATUS, loginCheckStatusSaga);
     yield takeEvery(actionTypes.LOGOUT_USER, logoutSaga);
+}
+
+export function* watchRegister() {
+    yield takeEvery(actionTypes.REGISTER_USER, registerSaga);
 }
 
 export function* watchDashboard() {
@@ -17,12 +22,16 @@ export function* watchDashboard() {
         // Start background tasks to update the dashboard
         const bgTicketsSagaTask = yield fork(dashboardTicketsSaga);
         const bgSupportCallsSagaTask = yield fork(dashboardSupportCallsSaga);
+        const bgProgressSagaTask = yield fork(dashboardProgressSaga);
+        const bgStatisticsSagaTask = yield fork(dashboardStatisticsSaga);
         
         // Wait for the dashboard sync stop task which will be called when the dashboard component unmounts
         yield take(actionTypes.DASHBOARD_SYNC_STOP);
         yield all ([
             cancel(bgTicketsSagaTask),
-            cancel(bgSupportCallsSagaTask)
+            cancel(bgSupportCallsSagaTask),
+            cancel(bgProgressSagaTask),            
+            cancel(bgStatisticsSagaTask)            
         ]);
 
     }

@@ -10,7 +10,7 @@ const progressDashboardPanel = (props) => {
                 <span>{props.caption}</span>
             </div>
             <div className="Content">
-            <Progress type="dashboard" percent={props.value} format={percent => `${percent}%`}/>
+                <Progress type="dashboard" percent={props.value} format={percent => `${percent}%`}/>
             </div>
             <div className="Footer">
                 <span>{props.description}</span>

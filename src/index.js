@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
-import { watchLogin, watchDashboard } from './store/sagas';
+import { watchLogin, watchRegister, watchDashboard } from './store/sagas';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -22,6 +22,7 @@ const store = createStore(reducers, composeEnhancers(
 
 // Saga action watchers
 sagaMiddleware.run(watchLogin);
+sagaMiddleware.run(watchRegister);
 sagaMiddleware.run(watchDashboard);
 
 // Application setup

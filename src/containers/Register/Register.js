@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
-import { Form, Input, Tooltip, Icon, Select, Checkbox, Button } from 'antd';
+import { connect } from 'react-redux';
+import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, Alert } from 'antd';
 
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import axios from '../../config/axios-authentication';
+
+import * as actions from '../../store/actions';
 import './Register.css';
 
 const FormItem = Form.Item;
@@ -12,17 +17,18 @@ class Register extends Component {
         confirmDirty: false
       };
 
-      handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
+      handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.form.validateFields((error, values) => {
+          if (!error) {
+            console.log('Received values of register form: ', values);
+            this.props.onRegister(values.email, values.password);
           }
         });
       }
 
-      handleConfirmBlur = (e) => {
-        const value = e.target.value;
+      handleConfirmBlur = (event) => {
+        const value = event.target.value;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
       }
 
@@ -84,6 +90,14 @@ class Register extends Component {
             <div className="Register">
                 <div className="Header">Ant Design Registration</div>
                 <Form onSubmit={this.handleSubmit}>
+                  {this.props.error ? 
+                          <Alert
+                          style={{marginBottom: '20px'}}
+                          message="Registration Failure"
+                          description="The username or password is incorrect"
+                          type="error"
+                          showIcon
+                          /> : null}
                   <FormItem
                     {...formItemLayout}
                     label="Email">
@@ -182,4 +196,19 @@ class Register extends Component {
 
 }
 
-export default Form.create()(Register);
+const mapStateToProps = state => {
+  return {
+      isAuthenticating: state.login.authenticating,
+      isLoggedIn: state.login.token !== null
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+      onRegister: (email, password) => dispatch(actions.registerUser(email, password))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(withErrorHandler(Register, axios)));
+
+

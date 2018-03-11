@@ -9,8 +9,14 @@ export {
 } from './login';
 
 export {
+    registerUser
+} from './register';
+
+export {
     dashboardSyncStart,
     dashboardSyncStop, 
     dashboardUpdateTicketsChart,
-    dashboardUpdateSupportCallsChart
+    dashboardUpdateSupportCallsChart,
+    dashboardUpdateStatistics,
+    dashboardUpdateProgress
 } from './dashboard';
