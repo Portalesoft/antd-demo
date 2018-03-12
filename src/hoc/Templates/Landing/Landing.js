@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Login from '../../../containers/Login/Login';
 import Register from '../../../containers/Register/Register';
 import Logo from '../../../components/Logo/Logo';
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 
 import backgroundImage from '../../../assets/images/background.png';
 import './Landing.css';
@@ -16,7 +16,7 @@ class Landing extends Component {
         login: true
     };
 
-    menuItemSelected = (item, key, keyPath) => {
+    toggleState = (item, key, keyPath) => {
         this.setState(prevState => {
             return { login: !prevState.login };
         });
@@ -24,15 +24,16 @@ class Landing extends Component {
 
     render() {
 
-        let form = <Login />;
-        let menu = <Menu.Item key="1" disabled={this.props.isAuthenticating}>REGISTER</Menu.Item>;
+        let form = <Login onSignupHandler={this.toggleState}/>;
         if (!this.state.login) {
-            form = <Register />;
-            menu = <Menu.Item key="2">LOGIN</Menu.Item>;
+            form = <Register onLoginHandler={this.toggleState}/>;
         }
         
         return (
-            <Layout>
+            <Layout style={{
+                height:'100vh',
+                backgroundImage: `url(${backgroundImage})`,
+                backgroundSize: 'cover'}}>
                 <Header
                     style={{
                     background: '#fff',
@@ -40,27 +41,11 @@ class Landing extends Component {
                     position: 'fixed',
                     top: 0,
                     width: '100%',
-                    height: '64px'}}>
+                    height: '64px',
+                    zIndex: '1000'}}>
                     <Logo />
-                    <Menu 
-                        style={{float: 'right', lineHeight: '62px'}}
-                        theme="light"
-                        mode="horizontal"
-                        onClick={this.menuItemSelected}>
-                        {menu}
-                    </Menu>
                 </Header>
-                <Content
-                    style={{
-                        minHeight: '100%',
-                        width: '100%',
-                        height: 'auto',
-                        position: 'fixed',
-                        top: '64px',
-                        left: 0,
-                        backgroundImage: `url(${backgroundImage})`,
-                        backgroundSize: 'cover',
-                }}>{form}</Content>
+                <Content style={{ overflow: 'auto' }}>{form}</Content>
             </Layout>
         );
     }

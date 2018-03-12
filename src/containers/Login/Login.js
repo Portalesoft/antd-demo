@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Alert } from 'antd';
+import { Form, Icon, Input, Button, Alert, Divider } from 'antd';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../config/axios-authentication';
@@ -20,7 +20,7 @@ class Login extends Component {
             this.props.onLogin(values.email, values.password);
           }
         });
-      }
+    }
 
     render() {
         const { getFieldDecorator } = this.props.form;        
@@ -59,6 +59,10 @@ class Login extends Component {
                     <FormItem>
                         <Button type="primary" disabled={this.props.isAuthenticating} htmlType="submit" style={{width: '100%'}}>
                             Login
+                        </Button>      
+                        <Divider>or</Divider>              
+                        <Button disabled={this.props.isAuthenticating} onClick={this.props.onSignupHandler} style={{width: '100%'}}>
+                            Sign Up
                         </Button>                    
                     </FormItem>   
                 </Form>

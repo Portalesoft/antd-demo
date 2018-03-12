@@ -62,6 +62,7 @@ class Main extends Component {
                     {brand}
                     <Menu
                         defaultSelectedKeys={['1']}
+                        defaultOpenKeys={['dashboards']}
                         mode='inline'
                         theme='dark'
                         inlineIndent='16'>

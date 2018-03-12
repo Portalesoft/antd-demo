@@ -187,7 +187,8 @@ class Register extends Component {
                     )}
                   </FormItem>
                   <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Register</Button>
+                    <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>Register</Button>
+                    <a onClick={this.props.onLoginHandler}>Back to Login</a>
                   </FormItem>
                 </Form>
             </div>
