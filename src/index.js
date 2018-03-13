@@ -15,7 +15,8 @@ import registerServiceWorker from './registerServiceWorker';
 const sagaMiddleware = createSagaMiddleware();
 
 // Setup for redux dev tools, wrapping the apply middleware function call
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+//const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+const composeEnhancers = compose;
 const store = createStore(reducers, composeEnhancers(
   applyMiddleware(sagaMiddleware)
 ));

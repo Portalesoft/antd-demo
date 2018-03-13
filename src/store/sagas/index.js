@@ -1,7 +1,7 @@
 import { takeEvery, take, fork, cancel, all } from 'redux-saga/effects'; 
 import { loginSaga, loginCheckStatusSaga, logoutSaga } from './login';
 import { registerSaga } from './register';
-import { dashboardTicketsSaga, dashboardSupportCallsSaga, dashboardProgressSaga, dashboardStatisticsSaga } from './dashboard';
+import { dashboardTicketsSaga, dashboardProgressSaga, dashboardStatisticsSaga } from './dashboard';
 import * as actionTypes from '../actions/actionTypes';
 
 export function* watchLogin() {
@@ -21,7 +21,6 @@ export function* watchDashboard() {
 
         // Start background tasks to update the dashboard
         const bgTicketsSagaTask = yield fork(dashboardTicketsSaga);
-        const bgSupportCallsSagaTask = yield fork(dashboardSupportCallsSaga);
         const bgProgressSagaTask = yield fork(dashboardProgressSaga);
         const bgStatisticsSagaTask = yield fork(dashboardStatisticsSaga);
         
@@ -29,7 +28,6 @@ export function* watchDashboard() {
         yield take(actionTypes.DASHBOARD_SYNC_STOP);
         yield all ([
             cancel(bgTicketsSagaTask),
-            cancel(bgSupportCallsSagaTask),
             cancel(bgProgressSagaTask),            
             cancel(bgStatisticsSagaTask)            
         ]);

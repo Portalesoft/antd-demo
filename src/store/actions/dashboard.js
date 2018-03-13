@@ -19,13 +19,6 @@ export const dashboardUpdateTicketsChart = (values) => {
     };
 };
 
-export const dashboardUpdateSupportCallsChart = (values) => {
-    return {
-        type: actionTypes.DASHBOARD_UPDATE_SUPPORT_CALLS_CHART,
-        values: values
-    };
-};
-
 export const dashboardUpdateStatistics = (values) => {
     return {
         type: actionTypes.DASHBOARD_UPDATE_STATISTICS,

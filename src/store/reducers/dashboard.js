@@ -3,7 +3,6 @@ import update from 'immutability-helper';
 
 const initialState = {
     ticketsChartData: [],
-    supportCallsChartData: [],
     statisticsData: {
         openTickets: 24,
         ticketsToday: 10,
@@ -17,20 +16,14 @@ const initialState = {
 
 const dashboardSyncStop = (state, action) => {
     return update(state, {
-        ticketsChartData: { $set: [] },
-        supportCallsChartData: { $set: [] },
+        ticketsChartData: { $set: [] }
     });
 }
 
 const dashboardUpdateTicketsChartData = (state, action) => {
+    console.log('reducer', action);
     return update(state, {
         ticketsChartData: { $set: action.values }
-    });
-}
-
-const dashboardUpdateSupportCallsChartData = (state, action) => {
-    return update(state, {
-        supportCallsChartData: { $set: action.values }
     });
 }
 
@@ -50,8 +43,6 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.DASHBOARD_UPDATE_TICKETS_CHART: 
             return dashboardUpdateTicketsChartData(state, action);
-        case actionTypes.DASHBOARD_UPDATE_SUPPORT_CALLS_CHART: 
-            return dashboardUpdateSupportCallsChartData(state, action);
         case actionTypes.DASHBOARD_UPDATE_STATISTICS: 
             return dashboardUpdateStatistics(state, action);
         case actionTypes.DASHBOARD_UPDATE_PROGRESS: 

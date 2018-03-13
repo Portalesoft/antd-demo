@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Aux from 'react-aux';
-import Main from './hoc/Templates/Main/Main';
-import Landing from './hoc/Templates/Landing/Landing';
+import Main from './containers/Templates/Main/Main';
+import Landing from './containers/Templates/Landing/Landing';
 import * as actions from './store/actions';
 
 class App extends Component {

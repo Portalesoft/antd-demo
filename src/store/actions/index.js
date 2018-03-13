@@ -16,7 +16,6 @@ export {
     dashboardSyncStart,
     dashboardSyncStop, 
     dashboardUpdateTicketsChart,
-    dashboardUpdateSupportCallsChart,
     dashboardUpdateStatistics,
     dashboardUpdateProgress
 } from './dashboard';

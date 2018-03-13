@@ -42,16 +42,6 @@ class Main extends Component {
                 </Col>
             </Row>   
 
-        // Not using the navigation one menu in the demo anymore but leaving in as required a tweak 
-        // for mobile when the menu collapses in order to remove the text from the displayed menu
-        // let navigationOne =   
-        //     <Menu.Item key="sub3">
-        //         <Icon type="mail" />
-        //         { this.state.collapsed ? null : 'Navigation One'}
-        //     </Menu.Item>
-        // Collapse check:
-        // navigationOne = <SubMenu key="sub3" title={<span><Icon type="mail" /><span>Navigation One</span></span>}></SubMenu>
-
         if (this.state.collapsed) {
             brand = <Icon style={{color: 'white', paddingLeft: '32px'}} className='trigger' type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle}/>
         }
