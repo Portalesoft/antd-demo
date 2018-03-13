@@ -9,7 +9,9 @@ import { reducers } from './store/reducers';
 
 import './index.css';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+
+// import registerServiceWorker from './registerServiceWorker';
+import { unregister } from './registerServiceWorker';
 
 // Saga construction
 const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +28,10 @@ sagaMiddleware.run(watchLogin);
 sagaMiddleware.run(watchRegister);
 sagaMiddleware.run(watchDashboard);
 
+// Attempting to force an app reload due to the index hash changing doesn't work when the
+// service worker intercepts the request and loads a previous version of the app!
+unregister();
+
 // Application setup
 const rootElement = document.getElementById('root');
 ReactDOM.render(
@@ -36,4 +42,4 @@ ReactDOM.render(
     </Provider>,
     rootElement);
   
-registerServiceWorker();
+// registerServiceWorker();

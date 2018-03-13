@@ -21,7 +21,6 @@ const dashboardSyncStop = (state, action) => {
 }
 
 const dashboardUpdateTicketsChartData = (state, action) => {
-    console.log('reducer', action);
     return update(state, {
         ticketsChartData: { $set: action.values }
     });

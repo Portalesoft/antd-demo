@@ -6,6 +6,7 @@
     "@amcharts/amcharts3-react": "^3.0.4",
     "antd": "^3.2.3",
     "axios": "^0.18.0",
+    "battery-friendly-timer": "^1.0.1",
     "chart.js": "^2.7.2",
     "immutability-helper": "^2.6.6",
     "prop-types": "^15.6.1",

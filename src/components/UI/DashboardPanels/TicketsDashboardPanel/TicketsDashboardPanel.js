@@ -56,7 +56,7 @@ const ticketsDashboardPanel = (props) => {
         "tickLength": 0
         },
         "export": {
-            "enabled": true
+            "enabled": false
         }
     };        
 

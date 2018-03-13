@@ -9,12 +9,12 @@ const demoDashboardPanel = (props) => {
         "type": "serial",
         "dataProvider": [{
             "country": "USA",
-            "year2016": 3.5,
-            "year2017": 4.2
+            "year2016": 10.5,
+            "year2017": 12.2
         }, {
             "country": "UK",
-            "year2016": 1.7,
-            "year2017": 3.1
+            "year2016": 23.7,
+            "year2017": 28.1
         }, {
             "country": "Canada",
             "year2016": 2.8,
@@ -37,8 +37,8 @@ const demoDashboardPanel = (props) => {
             "year2017": 7.2
         }, {
             "country": "India",
-            "year2016": 8,
-            "year2017": 7.1
+            "year2016": 14.3,
+            "year2017": 17.1
         }, {
             "country": "China",
             "year2016": 9.9,
@@ -51,14 +51,14 @@ const demoDashboardPanel = (props) => {
         }],
         "startDuration": 0.4,
         "graphs": [{
-            "balloonText": "[[category]] (2016): <b>[[value]]</b>",
+            "balloonText": "[[category]] (2016): <b>[[value]]%</b>",
             "fillAlphas": 0.6,
             "lineAlpha": 0.2,
             "title": "2016",
             "type": "column",
             "valueField": "year2016"
         }, {
-            "balloonText": "[[category]] (2017): <b>[[value]]</b>",
+            "balloonText": "[[category]] (2017): <b>[[value]]%</b>",
             "fillAlphas": 0.9,
             "lineAlpha": 0.2,
             "title": "2017",

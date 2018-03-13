@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Aux from 'react-aux';
+import AutoReload from './containers/Utilities/AutoReload/AutoReload';
 import Main from './containers/Templates/Main/Main';
 import Landing from './containers/Templates/Landing/Landing';
 import * as actions from './store/actions';
@@ -23,6 +24,7 @@ class App extends Component {
 
     return (
       <Aux>
+        <AutoReload title="React Ant Design Demo" url="/index.html" tryDelay={1 * 10 * 1000} />
         {template}
       </Aux>
     );
