@@ -49,7 +49,7 @@ const demoDashboardPanel = (props) => {
             "unit": "%",
             "position": "left",
         }],
-        "startDuration": 0.2,
+        "startDuration": 0.4,
         "graphs": [{
             "balloonText": "[[category]] (2016): <b>[[value]]</b>",
             "fillAlphas": 0.6,
