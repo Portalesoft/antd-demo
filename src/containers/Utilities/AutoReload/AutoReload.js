@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 class AutoReload extends Component {
 
+    // Older way of creating state and class objects, just here for reference purposes
     constructor(props) {
         super(props);
         this.previousHash = null;

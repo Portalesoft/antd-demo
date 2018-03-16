@@ -4,6 +4,7 @@ import Login from '../../../containers/Login/Login';
 import Register from '../../../containers/Register/Register';
 import Logo from '../../../components/Logo/Logo';
 import { Layout } from 'antd';
+import * as actions from '../../../store/actions';
 
 import backgroundImage from '../../../assets/images/background.png';
 import './Landing.css';
@@ -17,7 +18,8 @@ class Landing extends Component {
     };
 
     toggleState = (item, key, keyPath) => {
-        this.setState(prevState => {
+        this.props.onLoginReset();
+        this.setState(prevState => {            
             return { login: !prevState.login };
         });
     }
@@ -57,6 +59,12 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(Landing);
+const mapDispatchToProps = dispatch => {
+    return {
+        onLoginReset: () => dispatch(actions.loginReset())
+    };
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
 
 

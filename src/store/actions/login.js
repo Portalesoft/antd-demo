@@ -14,6 +14,12 @@ export const loginStart = () => {
     };
 };
 
+export const loginReset = () => {
+    return {
+        type: actionTypes.LOGIN_RESET
+    };
+};
+
 export const loginSuccess = (token, userId) => {
     return {
         type: actionTypes.LOGIN_SUCCESS,
@@ -22,9 +28,10 @@ export const loginSuccess = (token, userId) => {
     };
 };
 
-export const loginFail = () => {
+export const loginFail = (error) => {
     return {
-        type: actionTypes.LOGIN_FAIL
+        type: actionTypes.LOGIN_FAIL,
+        error: error
     };
 };
 

@@ -3,8 +3,11 @@ export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGIN_CHECK_STATUS = 'LOGIN_CHECK_STATUS';
+export const LOGIN_RESET = "LOGIN_RESET";
 
 export const REGISTER_USER = "REGISTER_USER";
+export const REGISTER_START = "REGISTER_START";
+export const REGISTER_FAIL = "REGISTER_FAIL";
 
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';

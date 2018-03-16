@@ -4,12 +4,21 @@ import update from 'immutability-helper';
 const initialState = {
     token: null,
     userId: null,
-    authenticating: false
+    authenticating: false,
+    error: null
 }
 
 const loginStart = (state, action) => {
     return update(state, {
-        authenticating: { $set: true }
+        authenticating: { $set: true },
+        error: { $set: null },
+    });
+}
+
+const loginReset = (state, action) => {
+    return update(state, {
+        authenticating: { $set: false },
+        error: { $set: null },
     });
 }
 
@@ -23,7 +32,8 @@ const loginSuccess = (state, action) => {
 
 const loginFail = (state, action) => {
     return update(state, {
-        authenticating: { $set: false }
+        authenticating: { $set: false },
+        error: { $set: action.error }
     });
 }
 
@@ -38,6 +48,8 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.LOGIN_START: 
             return loginStart(state, action);
+        case actionTypes.LOGIN_RESET: 
+            return loginReset(state, action);
         case actionTypes.LOGIN_SUCCESS: 
             return loginSuccess(state, action);
         case actionTypes.LOGIN_FAIL: 

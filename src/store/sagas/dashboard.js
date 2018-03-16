@@ -18,8 +18,9 @@ export function* dashboardTicketsSaga() {
                 openedTickets: randomIntFromInterval(10, 40)
             });
         });
-        yield call(delay, 5000);
+        yield call(delay, 1000);
         yield put(actions.dashboardUpdateTicketsChart(values));
+        yield call(delay, 4000);
     }
 
 }

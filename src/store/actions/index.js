@@ -4,6 +4,7 @@ export {
     loginSuccess,
     loginFail,
     loginCheckStatus,
+    loginReset,
     logoutUser,
     logoutSuccess
 } from './login';

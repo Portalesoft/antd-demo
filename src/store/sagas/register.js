@@ -17,21 +17,16 @@ export function* registerSaga(action) {
         };
 
         const response = yield axios.post('/signupNewUser?key=AIzaSyCn5-4vBc4m-ix5upyBoj2_mt_rLxgZRRA', registerCredentials);
-        if (response) {
+        const expirationDate = yield new Date(new Date().getTime() + response.data.expiresIn * 1000);
+        yield call([localStorage, 'setItem'], 'token', response.data.idToken);
+        yield call([localStorage, 'setItem'], 'userId', response.data.localId);
+        yield call([localStorage, 'setItem'], 'expirationDate', expirationDate);
+        yield put(actions.loginSuccess(response.data.idToken, response.data.localId));
+        // yield put(actions.checkAuthTimeout(response.data.expiresIn));
+        return;
 
-            const expirationDate = yield new Date(new Date().getTime() + response.data.expiresIn * 1000);
-            yield call([localStorage, 'setItem'], 'token', response.data.idToken);
-            yield call([localStorage, 'setItem'], 'userId', response.data.localId);
-            yield call([localStorage, 'setItem'], 'expirationDate', expirationDate);
-            yield put(actions.loginSuccess(response.data.idToken, response.data.localId));
-            // yield put(actions.checkAuthTimeout(response.data.expiresIn));
-            return;
-
-        }
-
-    } catch (error) {} 
-
-    // If we get here simply terminate the login process
-    yield put(actions.loginFail());
+    } catch (error) {
+        yield put(actions.loginFail(error));
+    } 
 
 }

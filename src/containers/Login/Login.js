@@ -1,71 +1,57 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Icon, Input, Button, Alert, Divider } from 'antd';
-
-import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import axios from '../../config/axios-authentication';
+import { Field, reduxForm } from 'redux-form';
+import { required, email } from 'redux-form-validators'
+import { Form, Button, Divider, Alert } from 'antd';
+import { Input } from '../../components/UI/AntDesign';
 
 import * as actions from '../../store/actions';
-import './Login.css';
-
-const FormItem = Form.Item;
+import './Login.css'
 
 class Login extends Component {
     
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.props.form.validateFields((error, values) => {
-          if (!error) {
-            console.log('Received values of login form: ', values);
-            this.props.onLogin(values.email, values.password);
-          }
-        });
+    submit = (values) => {
+        console.log('Received values of login form: ', values);
+        this.props.onLogin(values.Username, values.Password);
     }
 
     render() {
-        const { getFieldDecorator } = this.props.form;        
+        const { handleSubmit, isAuthenticating, onSignupHandler } = this.props;
         return (
             <div className="Login">
                 <div className="Header">Ant Design</div>
-                <Form onSubmit={this.handleSubmit}>
-                    {this.props.error ? 
+                <form onSubmit={handleSubmit(this.submit)}>
+                    {this.props.loginError ? 
                         <Alert
-                        style={{marginBottom: '20px'}}
-                        message="Login Failure"
-                        description="The username or password is incorrect"
-                        type="error"
-                        showIcon
+                            style={{marginBottom: '20px'}}
+                            message="Login Failure"
+                            description="The username or password is incorrect"
+                            type="error"
+                            showIcon
                         /> : null}
-                    <FormItem>
-                        {getFieldDecorator('email', {
-                            rules: [{
-                                type: 'email', message: 'Please enter a valid email address',
-                            }, {
-                                required: true, message: 'Please enter your email address',
-                            }],
-                        })(
-                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
-                        )}
-                    </FormItem>                
-                    <FormItem>
-                        {getFieldDecorator('password', {
-                            rules: [{
-                                required: true, message: 'Please enter your password',
-                            }],
-                        })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        <Button type="primary" disabled={this.props.isAuthenticating} htmlType="submit" style={{width: '100%'}}>
+                    <Field 
+                        name="Username" 
+                        component={Input} 
+                        placeholder="Username" 
+                        validate={[required(), email()]}
+                        icon="user"/>
+                    <Field 
+                        name="Password" 
+                        type="password" 
+                        component={Input} 
+                        placeholder="Password" 
+                        validate={required()}
+                        icon="lock"/>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" disabled={isAuthenticating} style={{width: '100%'}}>
                             Login
                         </Button>      
                         <Divider>or</Divider>              
-                        <Button disabled={this.props.isAuthenticating} onClick={this.props.onSignupHandler} style={{width: '100%'}}>
+                        <Button disabled={isAuthenticating} onClick={onSignupHandler} style={{width: '100%'}}>
                             Sign Up
                         </Button>                    
-                    </FormItem>   
-                </Form>
+                    </Form.Item>   
+                </form>
             </div>
         );
     }
@@ -75,7 +61,8 @@ class Login extends Component {
 const mapStateToProps = state => {
     return {
         isAuthenticating: state.login.authenticating,
-        isLoggedIn: state.login.token !== null
+        isLoggedIn: state.login.token !== null,
+        loginError: state.login.error
     };
 };
 
@@ -85,4 +72,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(withErrorHandler(Login, axios)));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({form: 'login'})(Login));

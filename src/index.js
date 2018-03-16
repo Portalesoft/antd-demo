@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
+import Validators from 'redux-form-validators';
 import { watchLogin, watchRegister, watchDashboard } from './store/sagas';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -17,8 +18,8 @@ import { unregister } from './registerServiceWorker';
 const sagaMiddleware = createSagaMiddleware();
 
 // Setup for redux dev tools, wrapping the apply middleware function call
-//const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
-const composeEnhancers = compose;
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+//const composeEnhancers = compose;
 const store = createStore(reducers, composeEnhancers(
   applyMiddleware(sagaMiddleware)
 ));
@@ -31,6 +32,12 @@ sagaMiddleware.run(watchDashboard);
 // Attempting to force an app reload due to the index hash changing doesn't work when the
 // service worker intercepts the request and loads a previous version of the app!
 unregister();
+
+// Modifiy default validation messages
+Object.assign(Validators.messages, {
+  presence: "is a required field",
+  email: "is not a valid email address"
+});
 
 // Application setup
 const rootElement = document.getElementById('root');

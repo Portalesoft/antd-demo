@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
-import TicketsDashboardPanel from '../../components/UI/DashboardPanels/TicketsDashboardPanel/TicketsDashboardPanel';
-import DemoDashboardPanel from '../../components/UI/DashboardPanels/DemoDashboardPanel/DemoDashboardPanel';
-import StatisticDashboardPanel from '../../components/UI/DashboardPanels/StatisticDashboardPanel/StatisticDashboardPanel';
-import ProgressDashboardPanel from '../../components/UI/DashboardPanels/ProgressDashboardPanel/ProgressDashboardPanel';
+import TicketsDashboardPanel from '../../components/Dashboard/TicketsDashboardPanel/TicketsDashboardPanel';
+import DemoDashboardPanel from '../../components/Dashboard/DemoDashboardPanel/DemoDashboardPanel';
+import StatisticDashboardPanel from '../../components/Dashboard/StatisticDashboardPanel/StatisticDashboardPanel';
+import ProgressDashboardPanel from '../../components/Dashboard/ProgressDashboardPanel/ProgressDashboardPanel';
 
 import * as actions from '../../store/actions';
 import './Dashboard.css';
