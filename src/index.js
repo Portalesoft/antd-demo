@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
-import Validators from 'redux-form-validators';
+import { applyValidators } from './components/Forms/Utility/Validator';
 import { watchLogin, watchRegister, watchDashboard } from './store/sagas';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -18,8 +18,7 @@ import { unregister } from './registerServiceWorker';
 const sagaMiddleware = createSagaMiddleware();
 
 // Setup for redux dev tools, wrapping the apply middleware function call
-const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
-//const composeEnhancers = compose;
+let composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 const store = createStore(reducers, composeEnhancers(
   applyMiddleware(sagaMiddleware)
 ));
@@ -33,11 +32,8 @@ sagaMiddleware.run(watchDashboard);
 // service worker intercepts the request and loads a previous version of the app!
 unregister();
 
-// Modifiy default validation messages
-Object.assign(Validators.messages, {
-  presence: "is a required field",
-  email: "is not a valid email address"
-});
+// Apply additional configuration to redux validators
+applyValidators();
 
 // Application setup
 const rootElement = document.getElementById('root');

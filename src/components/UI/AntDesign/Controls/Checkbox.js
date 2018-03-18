@@ -8,7 +8,9 @@ const checkbox = ({
     input,
     style,
     label,
+    content,
     className,
+    labelCol,
     wrapperCol,
     meta: { touched, error, warning }
 }) => {
@@ -16,21 +18,34 @@ const checkbox = ({
     return (
         <Form.Item
             className={className}
+            label={label}
+            labelCol={labelCol}
             wrapperCol={wrapperCol}>
             <Checkbox
                 {...input}                 
                 style={style}>
-                    {label}
+                    {content}
             </Checkbox>
         </Form.Item>
     );
 
 }
 
+checkbox.defaultProps = {
+    isFormItem: true
+};
+
 checkbox.propTypes = {
     input: PropTypes.object.isRequired,
-    label: PropTypes.object,
+    isFormItem: PropTypes.bool,    
+    style: PropTypes.object,    
+    label: PropTypes.string,
+    content: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.object
+    ]),
     className: PropTypes.string,
+    labelCol: PropTypes.object,
     wrapperCol: PropTypes.object,
     meta: PropTypes.shape({ 
         touched: PropTypes.bool.isRequired, 

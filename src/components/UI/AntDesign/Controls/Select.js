@@ -7,6 +7,7 @@ import './Styles/Controls.css';
 
 const select = ({
     input,
+    isFormItem,
     caption,
     label,
     placeholder,
@@ -19,7 +20,6 @@ const select = ({
     wrapperCol,
     tooltip,
     options,
-    isAddonBefore,
     meta: { touched, error, warning }
 }) => {
 
@@ -50,20 +50,21 @@ const select = ({
     let control =
         <Select
             {...input} 
+            style={style}
             placeholder={placeholder} 
             showSearch={showSearch}
             optionFilterProp={optionFilterProp}
-            filterOption={filterOption}
-            style={style}>
+            filterOption={filterOption}>
                 {options.map(option => 
                     <Select.Option 
                         key={option.value} 
-                        value={option.value}>
+                        value={option.value}
+                        disabled={option.disabled}>
                             {option.text}
                     </Select.Option>)}
         </Select>
 
-    if (!isAddonBefore) {
+    if (isFormItem) {
         control = 
             <Form.Item
                 className={className}
@@ -81,11 +82,13 @@ const select = ({
 }
 
 select.defaultProps = {
-    isAddonBefore: false
+    isFormItem: true,
+    allowClear: false
 };
 
 select.propTypes = {
     input: PropTypes.object.isRequired,
+    isFormItem: PropTypes.bool,
     caption: PropTypes.string,
     label: PropTypes.string,
     showSearch: PropTypes.bool,
@@ -102,11 +105,10 @@ select.propTypes = {
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired
+            text: PropTypes.string.isRequired,
+            disabled: PropTypes.bool
         })
     ),
-    placeholder: PropTypes.string,
-    isAddonBefore: PropTypes.bool,
     meta: PropTypes.shape({ 
         touched: PropTypes.bool.isRequired, 
         error: PropTypes.string, 

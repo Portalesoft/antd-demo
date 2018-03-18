@@ -16,6 +16,7 @@ class Login extends Component {
     }
 
     render() {
+
         const { handleSubmit, isAuthenticating, onSignupHandler } = this.props;
         return (
             <div className="Login">
@@ -32,16 +33,18 @@ class Login extends Component {
                     <Field 
                         name="Username" 
                         component={Input} 
+                        style={{ marginBottom: '24px' }}
                         placeholder="Username" 
                         validate={[required(), email()]}
-                        icon="user"/>
+                        icon="user" />
                     <Field 
                         name="Password" 
                         type="password" 
+                        style={{ marginBottom: '24px' }}
                         component={Input} 
                         placeholder="Password" 
                         validate={required()}
-                        icon="lock"/>
+                        icon="lock" />
                     <Form.Item>
                         <Button type="primary" htmlType="submit" disabled={isAuthenticating} style={{width: '100%'}}>
                             Login

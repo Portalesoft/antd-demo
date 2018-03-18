@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Badge, Popover, Icon, Card, Divider, Menu } from 'antd';
-import * as menuItems from '../../Menu/menuItems';
+import * as menuIds from '../../menuids';
 import './ToolbarItems.css';
 
 // Simple implementation of a toolbar for demo purposes,  
@@ -93,7 +93,7 @@ const profileContent = (props) => {
                     <span>Support</span>
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key={menuItems.MENU_LOGOUT} style={{textAlign: 'left'}}>
+                <Menu.Item key={menuIds.MENU_LOGOUT} style={{textAlign: 'left'}}>
                     <Icon type="logout" />
                     <span>Logout</span>
                 </Menu.Item>

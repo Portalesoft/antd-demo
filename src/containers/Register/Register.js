@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { required, email } from 'redux-form-validators'
-import { Form, Button, Alert } from 'antd';
+import { Form as AntForm, Button, Alert } from 'antd';
 import { Input, Select, Checkbox } from '../../components/UI/AntDesign';
+import Form from '../../components/Forms/Form/Form';
 
+import * as normalize from '../../components/Forms/Utility/Normalize';
 import * as actions from '../../store/actions';
 import './Register.css'
 
@@ -54,100 +56,104 @@ class Register extends Component {
 
         const { handleSubmit } = this.props;
         return (
-            <div className="Register">
-                <div className="Header">Ant Design Registration</div>
-                <form onSubmit={handleSubmit(this.submit)}>
-                    {this.props.loginError ? 
-                        <Alert
-                            style={{marginBottom: '20px'}}
-                            message="Registration Failure"
-                            description="The username has already been registered"
-                            type="error"
-                            showIcon
-                        /> : null}
-                    <Field 
-                        {...formItemLayout}                         
-                        name="Username" 
-                        label="Email"
-                        component={Input} 
-                        className="Mandatory" 
-                        validate={[required(), email()]} />
-                    <Field 
-                        {...formItemLayout}
-                        name="Password" 
-                        label="Password"
-                        type="password" 
-                        component={Input} 
-                        className="Mandatory" 
-                        validate={required()} />
-                    <Field 
-                        {...formItemLayout}
-                        name="Confirm" 
-                        label="Confirm Password"
-                        type="password" 
-                        component={Input} 
-                        className="Mandatory" 
-                        validate={required()} />
-                    <Field 
-                        {...formItemLayout}
-                        name="Nickname" 
-                        label="Nickname"
-                        component={Input} 
-                        className="Mandatory"
-                        tooltip={{ title: "What do you want others to call you?", icon: "question-circle-o" }} 
-                        validate={required()} />
-                    <Field 
-                        {...formItemLayout}
-                        name="Office" 
-                        label="Office"
-                        component={Select}
-                        className="Mandatory"
-                        defaultValue="langley"
-                        showSearch
-                        style={{ width: 200 }}
-                        placeholder="Location"
-                        optionFilterProp="children"
-                        filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                        validate={required()}
-                        options={offices} />
-                    <Field 
-                        {...formItemLayout}
-                        name="Phone"
-                        label="Phone Number"
-                        type="number"
-                        component={Input} 
-                        className="Mandatory"                        
-                        style={{ width: '100%' }}
-                        prefixSelector={
-                            <Field
-                                name="AreaCode"
-                                component={Select}
-                                style={{ width: 80 }} 
-                                options={areaCodes} 
-                                isAddonBefore />
-                        }
-                        validate={required()} />
-                    <Field
-                        {...tailFormItemLayout}
-                        name="Agreement"
-                        label={<span>I have read the <a href="">agreement</a></span>}
-                        component={Checkbox}>
-                    </Field> 
-                    <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>Register</Button>
-                        <a onClick={this.props.onLoginHandler}>Back to Login</a>
-                    </Form.Item>                        
-                </form>
-            </div>
+            <Form 
+                title="Ant Design Registration" 
+                onSubmitHandler={handleSubmit(this.submit)}
+                className="Register">
+                {this.props.loginError ? 
+                    <Alert
+                        style={{marginBottom: '20px'}}
+                        message="Registration Failure"
+                        description="The username has already been registered"
+                        type="error"
+                        showIcon
+                    /> : null}
+                <Field 
+                    name="Username" 
+                    component={Input} 
+                    validate={[required(), email()]} 
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Email",
+                        ...formItemLayout                                                    
+                    }} />
+                <Field 
+                    name="Password" 
+                    component={Input} 
+                    type="password" 
+                    validate={required()}
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Password",
+                        ...formItemLayout                                                    
+                    }} />
+                <Field 
+                    name="Confirm" 
+                    component={Input} 
+                    type="password" 
+                    validate={required()}
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Confirm Password",
+                        ...formItemLayout                                                    
+                    }} />
+                <Field 
+                    name="Nickname" 
+                    component={Input} 
+                    type="password" 
+                    validate={required()}
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Nickname",
+                        tooltip: { title: "What do you want others to call you?", icon: "question-circle-o" },
+                        ...formItemLayout                                                    
+                    }} />
+                <Field                     
+                    {...formItemLayout}
+                    name="Office" 
+                    label="Office"
+                    component={Select}
+                    className="Mandatory"
+                    defaultValue="langley"
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Location"
+                    optionFilterProp="children"
+                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                    validate={required()}
+                    options={offices} />
+                <Field 
+                    name="Phone" 
+                    component={Input} 
+                    style={{ width: '100%' }}
+                    validate={required()}
+                    normalize={normalize.toInteger}
+                    addonBefore={
+                        <Field
+                            name="AreaCode"
+                            component={Select}
+                            style={{ width: 80 }} 
+                            options={areaCodes} 
+                            isFormItem={false} />
+                    }
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Phone Number",
+                        ...formItemLayout                                                    
+                    }} />
+                <Field
+                    {...tailFormItemLayout}
+                    name="Agreement"
+                    content={<span>I have read the <a href="">agreement</a></span>}
+                    component={Checkbox}>
+                </Field> 
+                <AntForm.Item {...tailFormItemLayout}>
+                    <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>Register</Button>
+                    <a onClick={this.props.onLoginHandler}>Back to Login</a>
+                </AntForm.Item>                        
+            </Form>
         );
     }
-
-    // <FormItem {...tailFormItemLayout}>
-    // {getFieldDecorator('agreement', {
-    //   valuePropName: 'checked',
-    // })(
-    //   <Checkbox>I have read the <a href="">agreement</a></Checkbox>
-    // )}
 
 }
 

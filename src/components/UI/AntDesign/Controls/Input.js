@@ -1,38 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Icon, Tooltip, Input } from 'antd';
-import { formatMessage } from '../Utility/Utility';
+import { checkFieldStatus } from '../Utility/Utility';
 
 import './Styles/Controls.css';
 
 const input = ({
     input,
-    caption,
-    label,
-    placeholder,
     type,
-    icon,
     style,
-    className,
-    labelCol,
-    wrapperCol,
-    hasFeedback,
-    prefixSelector,
-    tooltip,
+    icon,
+    placeholder,
+    addonBefore,
+    formatOnBlur,
+    formItem,
     meta: { touched, error, warning }
 }) => {
 
-    let validateStatus = touched ? "success" : null;
-    let help = null;
-    if (touched) {
-        if (error) {
-            validateStatus = "error";
-            help = formatMessage(caption, label, input.name, error);
-        } else if (warning) {
-            validateStatus = "warning";
-            help = formatMessage(caption, label, input.name, warning);                
-        } 
-    }
+    const { className, label, tooltip, labelCol, wrapperCol, hasFeedback } = formItem || {};
+    const { validateStatus, help } = checkFieldStatus(input.name, label, touched, error, warning) || {};
 
     let prefix = null;
     if (icon) {
@@ -51,43 +37,68 @@ const input = ({
           );
     }
 
-    return (
-        <Form.Item
-            className={className}
-            label={fieldLabel}
-            validateStatus={validateStatus}
-            help={help}
-            hasFeedback={hasFeedback}
-            labelCol={labelCol}
-            wrapperCol={wrapperCol}>
+    let control = 
+        <Input
+            {...input} 
+            placeholder={placeholder} 
+            type={type} 
+            style={style}
+            prefix={prefix} 
+            addonBefore={addonBefore} />
+
+    if (formatOnBlur) {
+        control =
             <Input
                 {...input} 
+                style={style}
                 placeholder={placeholder} 
                 type={type} 
-                style={style}
                 prefix={prefix} 
-                addonBefore={prefixSelector} />
-        </Form.Item>
-    );
+                addonBefore={addonBefore} 
+                onBlur={(e) => {
+                    formatOnBlur(e);
+                    input.onBlur(e);
+                }} />
+    }
+
+    if (formItem) {
+        control = 
+            <Form.Item
+                className={className}
+                label={fieldLabel}
+                validateStatus={validateStatus}
+                help={help}
+                hasFeedback={hasFeedback}
+                labelCol={labelCol}
+                wrapperCol={wrapperCol}>
+                    {control}
+            </Form.Item>
+    }
+
+    return control;
 
 }
 
+input.defaultProps = {};
+
 input.propTypes = {
     input: PropTypes.object.isRequired,
-    caption: PropTypes.string,
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
     type: PropTypes.string,
-    icon: PropTypes.string,
     style: PropTypes.object,
-    className: PropTypes.string,
-    labelCol: PropTypes.object,
-    wrapperCol: PropTypes.object,
-    hasFeedback: PropTypes.bool,
-    prefixSelector: PropTypes.object,
-    tooltip: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        icon: PropTypes.string.isRequired
+    placeholder: PropTypes.string,
+    icon: PropTypes.string,
+    addonBefore: PropTypes.object,
+    formatOnBlur: PropTypes.func,
+    formItem: PropTypes.shape({
+        className: PropTypes.string,
+        label: PropTypes.string,
+        labelCol: PropTypes.object,
+        tooltip: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            icon: PropTypes.string.isRequired
+        }),
+        wrapperCol: PropTypes.object,
+        hasFeedback: PropTypes.bool
     }),
     meta: PropTypes.shape({ 
         touched: PropTypes.bool.isRequired, 
