@@ -109,19 +109,20 @@ class Register extends Component {
                         ...formItemLayout                                                    
                     }} />
                 <Field                     
-                    {...formItemLayout}
                     name="Office" 
-                    label="Office"
                     component={Select}
-                    className="Mandatory"
                     defaultValue="langley"
                     showSearch
                     style={{ width: 200 }}
-                    placeholder="Location"
                     optionFilterProp="children"
                     filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                     validate={required()}
-                    options={offices} />
+                    options={offices} 
+                    formItem={{
+                        className: "Mandatory",
+                        label: "Office",
+                        ...formItemLayout                                                    
+                    }} />
                 <Field 
                     name="Phone" 
                     component={Input} 
@@ -133,8 +134,7 @@ class Register extends Component {
                             name="AreaCode"
                             component={Select}
                             style={{ width: 80 }} 
-                            options={areaCodes} 
-                            isFormItem={false} />
+                            options={areaCodes} />
                     }
                     formItem={{
                         className: "Mandatory",
@@ -142,11 +142,12 @@ class Register extends Component {
                         ...formItemLayout                                                    
                     }} />
                 <Field
-                    {...tailFormItemLayout}
                     name="Agreement"
                     content={<span>I have read the <a href="">agreement</a></span>}
-                    component={Checkbox}>
-                </Field> 
+                    component={Checkbox}
+                    formItem={{
+                        ...tailFormItemLayout                                                    
+                    }} />
                 <AntForm.Item {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>Register</Button>
                     <a onClick={this.props.onLoginHandler}>Back to Login</a>

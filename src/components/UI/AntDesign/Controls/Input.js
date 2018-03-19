@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Icon, Tooltip, Input } from 'antd';
-import { checkFieldStatus } from '../Utility/Utility';
+import { Icon, Input } from 'antd';
+import withFormItem from '../hoc/withFormItem/withFormItem';
 
 import './Styles/Controls.css';
 
@@ -14,35 +14,20 @@ const input = ({
     addonBefore,
     formatOnBlur,
     formItem,
-    meta: { touched, error, warning }
+    meta
 }) => {
-
-    const { className, label, tooltip, labelCol, wrapperCol, hasFeedback } = formItem || {};
-    const { validateStatus, help } = checkFieldStatus(input.name, label, touched, error, warning) || {};
 
     let prefix = null;
     if (icon) {
         prefix = <Icon type={icon} style={{ color: 'rgba(0,0,0,.25)' }} />
     }
 
-    let fieldLabel = label;
-    if (tooltip) {
-        fieldLabel = (
-            <span>
-              {label}&nbsp;
-              <Tooltip title={tooltip.title}>
-                <Icon type={tooltip.icon} />
-              </Tooltip>
-            </span>
-          );
-    }
-
     let control = 
         <Input
             {...input} 
-            placeholder={placeholder} 
             type={type} 
             style={style}
+            placeholder={placeholder} 
             prefix={prefix} 
             addonBefore={addonBefore} />
 
@@ -50,9 +35,9 @@ const input = ({
         control =
             <Input
                 {...input} 
+                type={type} 
                 style={style}
                 placeholder={placeholder} 
-                type={type} 
                 prefix={prefix} 
                 addonBefore={addonBefore} 
                 onBlur={(e) => {
@@ -61,26 +46,11 @@ const input = ({
                 }} />
     }
 
-    if (formItem) {
-        control = 
-            <Form.Item
-                className={className}
-                label={fieldLabel}
-                validateStatus={validateStatus}
-                help={help}
-                hasFeedback={hasFeedback}
-                labelCol={labelCol}
-                wrapperCol={wrapperCol}>
-                    {control}
-            </Form.Item>
-    }
-
     return control;
 
 }
 
 input.defaultProps = {};
-
 input.propTypes = {
     input: PropTypes.object.isRequired,
     type: PropTypes.string,
@@ -88,22 +58,7 @@ input.propTypes = {
     placeholder: PropTypes.string,
     icon: PropTypes.string,
     addonBefore: PropTypes.object,
-    formatOnBlur: PropTypes.func,
-    formItem: PropTypes.shape({
-        className: PropTypes.string,
-        label: PropTypes.string,
-        labelCol: PropTypes.object,
-        tooltip: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            icon: PropTypes.string.isRequired
-        }),
-        wrapperCol: PropTypes.object,
-        hasFeedback: PropTypes.bool
-    }),
-    meta: PropTypes.shape({ 
-        touched: PropTypes.bool.isRequired, 
-        error: PropTypes.string, 
-        warning: PropTypes.string})
+    formatOnBlur: PropTypes.func
 }
 
-export default input;
+export default withFormItem(input);
