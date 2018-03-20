@@ -13,7 +13,8 @@ const checkbox = ({
     meta
 }) => (
     <Checkbox
-        {...input}                 
+        {...input}   
+        defaultChecked={input.value !== '' ? input.value : false}              
         style={style}>
             {content}
     </Checkbox>
@@ -23,11 +24,10 @@ checkbox.defaultProps = {};
 checkbox.propTypes = {
     input: PropTypes.object.isRequired,
     style: PropTypes.object,
-    placeholder: PropTypes.string,
     content: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
     ])
-}
+};
 
 export default withFormItem(checkbox);

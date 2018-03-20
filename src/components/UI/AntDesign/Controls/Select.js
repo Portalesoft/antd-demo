@@ -48,7 +48,7 @@ select.propTypes = {
             disabled: PropTypes.bool
         })
     )    
-}
+};
 
 export default withFormItem(select);
 

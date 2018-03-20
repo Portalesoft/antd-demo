@@ -1,43 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import { DatePicker } from 'antd';
+import { TimePicker } from 'antd';
 import withFormItem from '../hoc/withFormItem/withFormItem';
 
 import './Styles/Controls.css';
 
-const datePicker = ({
+const timePicker = ({
     input,
     style,
     placeholder,
-    showTime,
     formItem,
     meta
 }) => {
 
-    const format = showTime ? 'MMM DD YYYY HH:mm' : 'MMM DD YYYY'
+    const format = 'HH:mm';
     return (
-        <DatePicker 
+        <TimePicker 
             {...input}        
             style={style} 
             value={input.value !== '' ? moment(input.value, format) : null}
             format={format}
-            showTime={showTime}
             placeholder={placeholder} />
     );
-};
+}
 
 
-datePicker.defaultProps = {
-    showTime: false,
+timePicker.defaultProps = {
     placeholder: null
 };
 
-datePicker.propTypes = {
+timePicker.propTypes = {
     input: PropTypes.object.isRequired,
     style: PropTypes.object,
     placeholder: PropTypes.string,
     showTime: PropTypes.bool
 };
 
-export default withFormItem(datePicker);
+export default withFormItem(timePicker);

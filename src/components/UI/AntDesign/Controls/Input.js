@@ -12,6 +12,7 @@ const input = ({
     icon,
     placeholder,
     addonBefore,
+    addonAfter,
     formatOnBlur,
     formItem,
     meta
@@ -29,7 +30,8 @@ const input = ({
             style={style}
             placeholder={placeholder} 
             prefix={prefix} 
-            addonBefore={addonBefore} />
+            addonBefore={addonBefore} 
+            addonAfter={addonAfter} />
 
     if (formatOnBlur) {
         control =
@@ -40,6 +42,7 @@ const input = ({
                 placeholder={placeholder} 
                 prefix={prefix} 
                 addonBefore={addonBefore} 
+                addonAfter={addonAfter} 
                 onBlur={(e) => {
                     formatOnBlur(e);
                     input.onBlur(e);
@@ -50,7 +53,10 @@ const input = ({
 
 }
 
-input.defaultProps = {};
+input.defaultProps = {
+    placeholder: null
+};
+
 input.propTypes = {
     input: PropTypes.object.isRequired,
     type: PropTypes.string,
@@ -58,7 +64,8 @@ input.propTypes = {
     placeholder: PropTypes.string,
     icon: PropTypes.string,
     addonBefore: PropTypes.object,
+    addonAfter: PropTypes.object,
     formatOnBlur: PropTypes.func
-}
+};
 
 export default withFormItem(input);

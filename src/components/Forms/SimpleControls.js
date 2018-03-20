@@ -1,8 +1,8 @@
 import React from 'react';
 import Form from './Form/Form';
 import { Field, reduxForm } from 'redux-form';
-import { Row, Col } from 'antd';
-import { Input, Select, Checkbox, DatePicker } from '../../components/UI/AntDesign';
+import { Row, Col, Icon } from 'antd';
+import { Input, Select, Checkbox, DatePicker, TimePicker, RangePicker, Switch, RadioGroup } from '../../components/UI/AntDesign';
 import * as normalize from './Utility/Normalize';
 import * as format from './Utility/Format';
 
@@ -26,124 +26,201 @@ const simpleControls = (props) => {
         { value: 'hongkong', text: 'Hong Kong' }
     ];
 
+    const coloursList =   [
+        { value: 1, text: 'Red' },
+        { value: 2, text: 'Green' },
+        { value: 3, text: 'Blue' }
+    ];
+
+    const areaCodes = [
+        {value: '44', text: '+44'},
+        {value: '852', text: '+852'}
+    ];
+
     return (
         <Form title="Simple Form Controls">
-            <Row gutter={0} style={{ marginBottom: 0 }}>
+            <Row>
                 <Col span={24} md={{ span: 12 }}>
-                    <Field {...formItemLayout}
+                    <Field
                         name="Textbox" 
-                        label="Simple textbox"
-                        component={Input} />
-                    <Field {...formItemLayout}
-                        name="Alphanumeric" 
-                        label="Alphanumeric"
                         component={Input} 
-                        normalize={normalize.toAlphanumeric} />
-                    <Field {...formItemLayout}
+                        formItem={{
+                            label: "Simple textbox",
+                            ...formItemLayout
+                            }} />
+                    <Field
+                        name="Alphanumeric" 
+                        component={Input} 
+                        normalize={normalize.toAlphanumeric} 
+                        formItem={{
+                            label: "Alphanumeric",
+                            ...formItemLayout
+                            }} />
+                    <Field
                         name="Integer" 
-                        label="Integer number"
                         component={Input} 
                         style={{ minwidth: '60%' }}
-                        normalize={normalize.toInteger} />
-                    <Field {...formItemLayout}
+                        normalize={normalize.toInteger} 
+                        formItem={{
+                            label: "Integer number",
+                            ...formItemLayout
+                            }} />
+                    <Field 
                         name="Decimal" 
-                        label="Decimal number"
                         component={Input} 
                         style={{ width: '60%' }}
                         normalize={normalize.toDecimal(-1)}                        
-                        formatOnBlur={format.toDecimal(-1)} />                       
-                    <Field {...formItemLayout}
+                        formatOnBlur={format.toDecimal(-1)}                     
+                        formItem={{
+                            label: "Decimal number",
+                            ...formItemLayout
+                            }} />
+                    <Field 
                         name="Decimal2DP" 
-                        label="Decimal (2DP)"
                         component={Input} 
                         style={{ width: '60%' }}
                         normalize={normalize.toDecimal(2)}                        
-                        formatOnBlur={format.toDecimal(2)} />                       
-                    <Field {...formItemLayout}
-                        name="Icon" 
-                        label="Icon &amp; Placeholder"
-                        icon="mail"
-                        placeholder="Email Address"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        formatOnBlur={format.toDecimal(2)}
+                        formItem={{
+                            label: "Decimal (2DP)",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="Cascade" 
-                        label="Cascade"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={Input} 
+                        formItem={{
+                            label: "Cascade",
+                            ...formItemLayout
+                            }} />                                                
+                    <Field
                         name="Select" 
-                        label="Select List"
                         component={Select}
-                        options={officeList} />
-                    <Field {...formItemLayout}
+                        options={officeList} 
+                        formItem={{
+                            label: "Select List",
+                            ...formItemLayout
+                            }} />                                                
+                    <Field 
                         name="SelectSearch" 
-                        label="Select Search"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={Input} 
+                        formItem={{
+                            label: "Select Search",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
+                        name="SelectTags" 
+                        component={Input} 
+                        formItem={{
+                            label: "Select Tags",
+                            ...formItemLayout
+                            }} />                        
+                    <Field
                         name="RemoteSelect" 
-                        label="Remote Select"
-                        component={Input} />
-                    <Field {...formItemLayout}
-                        name="Checkbox" 
-                        label="Checkbox"
-                        component={Checkbox} 
-                        content={<span>Click me to toggle value</span>} />
-                    <Field {...formItemLayout}
-                        name="FixedTextArea" 
-                        label="Fixed Text Area"
-                        component={Input} />                                                                   
+                        component={Input} 
+                        formItem={{
+                            label: "Remote Select",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
+                        name="TextArea" 
+                        component={Input}
+                        formItem={{
+                            label: "Text Area",
+                            ...formItemLayout
+                            }} />                        
                 </Col>
                 <Col span={24} md={{ span: 12 }}>
-                    <Field {...formItemLayout}
+                    <Field 
                         name="Uppercase" 
-                        label="Uppercase"
                         component={Input} 
-                        normalize={normalize.toUpperCase} />
-                    <Field {...formItemLayout}
+                        normalize={normalize.toUpperCase} 
+                        formItem={{
+                            label: "Uppercase",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="Lowercase" 
-                        label="Lowercase"
                         component={Input} 
-                        normalize={normalize.toLowerCase} />
-                    <Field {...formItemLayout}
+                        normalize={normalize.toLowerCase}
+                        formItem={{
+                            label: "Lowercase",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="Alphabetic" 
-                        label="Alphabetic"
                         component={Input} 
-                        normalize={normalize.toAlphabetic} />
-                    <Field {...formItemLayout}
+                        normalize={normalize.toAlphabetic}
+                        formItem={{
+                            label: "Alphabetic",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="Date" 
-                        label="Date"
-                        component={DatePicker} />
-                    <Field {...formItemLayout}
+                        component={DatePicker}
+                        formItem={{
+                            label: "Date",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="DateTime" 
-                        label="Datetime"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={DatePicker} 
+                        showTime
+                        formItem={{
+                            label: "Datetime",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
                         name="Time" 
-                        label="Time"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={TimePicker}
+                        formItem={{
+                            label: "Time",
+                            ...formItemLayout
+                            }} />                        
+                    <Field
                         name="Range" 
-                        label="Range"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={RangePicker}
+                        formItem={{
+                            label: "Range",
+                            ...formItemLayout
+                            }} />                        
+                    <Field
                         name="Combination" 
-                        label="Combination"
-                        component={Input} />
-                    <Field {...formItemLayout}
-                        name="SelectTags" 
-                        label="Select Tags"
-                        component={Input} />
-                    <Field {...formItemLayout}
-                        name="Switch" 
-                        label="Switch"
-                        component={Input} />
-                    <Field {...formItemLayout}
+                        component={Input} 
+                        addonBefore={
+                            <Field
+                                name="CombinationBefore"
+                                component={Select}
+                                style={{ width: 75 }} 
+                                options={areaCodes} />
+                        }
+                        addonAfter={<Icon type="setting" />}                        
+                        formItem={{
+                            label: "Combination",
+                            ...formItemLayout                                                    
+                        }} />
+                    <Field 
+                        name="Checkbox" 
+                        component={Checkbox} 
+                        content={<span>Click me to toggle value</span>} 
+                        formItem={{
+                            label: "Checkbox",
+                            ...formItemLayout
+                            }} />     
+                    <Field 
                         name="Radio" 
-                        label="Radio"
-                        component={Input} />                        
-                    <Field {...formItemLayout}
-                        name="DynamicTextArea" 
-                        label="Dynamic Text Area"
-                        component={Input} />     
+                        component={RadioGroup}
+                        radios={coloursList}
+                        formItem={{
+                            label: "Radio Group",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
+                        name="Switch" 
+                        component={Switch} 
+                        formItem={{
+                            label: "Switch",
+                            ...formItemLayout
+                            }} />                        
                 </Col>
             </Row>            
         </Form>

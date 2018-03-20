@@ -100,7 +100,6 @@ class Register extends Component {
                 <Field 
                     name="Nickname" 
                     component={Input} 
-                    type="password" 
                     validate={required()}
                     formItem={{
                         className: "Mandatory",

@@ -39,9 +39,9 @@ class Login extends Component {
                         icon="user" />
                     <Field 
                         name="Password" 
+                        component={Input} 
                         type="password" 
                         style={{ marginBottom: '24px' }}
-                        component={Input} 
                         placeholder="Password" 
                         validate={required()}
                         icon="lock" />
