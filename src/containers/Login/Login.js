@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { required, email } from 'redux-form-validators'
-import { Form, Button, Divider, Alert } from 'antd';
+import { Button, Divider, Alert } from 'antd';
 import { Input } from '../../components/UI/AntDesign';
 
 import * as actions from '../../store/actions';
@@ -45,15 +45,13 @@ class Login extends Component {
                         placeholder="Password" 
                         validate={required()}
                         icon="lock" />
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" disabled={isAuthenticating} style={{width: '100%'}}>
-                            Login
-                        </Button>      
-                        <Divider>or</Divider>              
-                        <Button disabled={isAuthenticating} onClick={onSignupHandler} style={{width: '100%'}}>
-                            Sign Up
-                        </Button>                    
-                    </Form.Item>   
+                    <Button type="primary" htmlType="submit" disabled={isAuthenticating} style={{width: '100%'}}>
+                        Login
+                    </Button>      
+                    <Divider>or</Divider>              
+                    <Button disabled={isAuthenticating} onClick={onSignupHandler} style={{width: '100%'}}>
+                        Sign Up
+                    </Button>                    
                 </form>
             </div>
         );

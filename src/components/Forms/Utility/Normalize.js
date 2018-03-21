@@ -27,6 +27,7 @@ export const toDecimal = (precision) =>
             }
         }
         return value;
-    }
-
+    }    
+export const lessThan = otherField => (value, previousValue, allValues) => value < allValues[otherField] ? value : previousValue;
+export const greaterThan = otherField => (value, previousValue, allValues) => value > allValues[otherField] ? value : previousValue;
 

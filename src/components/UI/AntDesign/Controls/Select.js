@@ -8,6 +8,7 @@ import './Styles/Controls.css';
 const select = ({
     input,
     style,
+    mode,
     placeholder,
     showSearch,
     optionFilterProp,
@@ -19,9 +20,11 @@ const select = ({
     <Select
         {...input} 
         style={style}
+        mode={mode}
         placeholder={placeholder} 
         showSearch={showSearch}
         optionFilterProp={optionFilterProp}
+        value={input.value === '' && (mode === 'multiple' || mode === 'tags') ? [] : input.value}
         filterOption={filterOption}>
             {options.map(option => 
                 <Select.Option 
@@ -33,17 +36,24 @@ const select = ({
     </Select>
 );
 
-select.defaultProps = {};
+select.defaultProps = {
+    mode: 'default'
+};
+
 select.propTypes = {
     input: PropTypes.object.isRequired,
     style: PropTypes.object,
+    mode: PropTypes.oneOf(['default', 'multiple', 'tags', 'combobox']),
     placeholder: PropTypes.string,
     showSearch: PropTypes.bool,
     optionFilterProp: PropTypes.string,
     filterOption: PropTypes.func,
     options: PropTypes.arrayOf(
         PropTypes.shape({
-            value: PropTypes.string.isRequired,
+            value: PropTypes.oneOfType([
+                PropTypes.string.isRequired,
+                PropTypes.number.isRequired
+            ]),
             text: PropTypes.string.isRequired,
             disabled: PropTypes.bool
         })

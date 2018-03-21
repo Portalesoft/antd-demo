@@ -2,9 +2,10 @@ import React from 'react';
 import Form from './Form/Form';
 import { Field, reduxForm } from 'redux-form';
 import { Row, Col, Icon } from 'antd';
-import { Input, Select, Checkbox, DatePicker, TimePicker, RangePicker, Switch, RadioGroup } from '../../components/UI/AntDesign';
+import { Input, Select, Checkbox, Cascader, DatePicker, TimePicker, RangePicker, Switch, RadioGroup, TextArea } from '../../components/UI/AntDesign';
 import * as normalize from './Utility/Normalize';
 import * as format from './Utility/Format';
+import * as filter from './Utility/Filter';
 
 const simpleControls = (props) => {
 
@@ -19,11 +20,37 @@ const simpleControls = (props) => {
         }
     };
 
+    const cascadeList = [{ 
+        value: 'red', 
+        label: 'Red',
+        children: [
+            { value: 'apple', label: 'Apple' },
+            { value: 'dragon', label: 'Dragon' },
+            { value: 'ferrari', label: 'Ferrari' }
+        ]
+      }, {
+        value: 'blue',
+        label: 'Blue',
+        children: [
+            { value: 'berry', label: 'Berry' },
+            { value: 'moon', label: 'Moon' }
+        ]
+    }];
+
     const officeList =   [
         { value: 'langley', text: 'Langley' },
         { value: 'coventry', text: 'Coventry' },
         { value: 'datchet', text: 'Datchet', disabled: true },
         { value: 'hongkong', text: 'Hong Kong' }
+    ];
+
+    const fruitList = [
+        { value: 'apple', text: 'Apple' },
+        { value: 'banana', text: 'Banana' },
+        { value: 'mango', text: 'Mango' },
+        { value: 'melon', text: 'Melon' },
+        { value: 'peach', text: 'Peach' },
+        { value: 'pear', text: 'Pear' }
     ];
 
     const coloursList =   [
@@ -86,32 +113,41 @@ const simpleControls = (props) => {
                             ...formItemLayout
                             }} />                        
                     <Field 
-                        name="Cascade" 
-                        component={Input} 
+                        name="Cascader" 
+                        component={Cascader} 
+                        options={cascadeList}
                         formItem={{
-                            label: "Cascade",
+                            label: "Cascader",
                             ...formItemLayout
                             }} />                                                
                     <Field
                         name="Select" 
                         component={Select}
+                        style={{ width: '60%' }}
                         options={officeList} 
                         formItem={{
                             label: "Select List",
                             ...formItemLayout
                             }} />                                                
-                    <Field 
+                    <Field                     
                         name="SelectSearch" 
-                        component={Input} 
+                        component={Select}
+                        style={{ width: '60%' }}
+                        showSearch
+                        optionFilterProp="children"
+                        filterOption={filter.likeMatch}
+                        options={fruitList} 
                         formItem={{
                             label: "Select Search",
-                            ...formItemLayout
-                            }} />                        
+                            ...formItemLayout                                                    
+                        }} />                                              
                     <Field 
-                        name="SelectTags" 
-                        component={Input} 
+                        name="MultiSelect" 
+                        component={Select} 
+                        mode="multiple"
+                        options={coloursList} 
                         formItem={{
-                            label: "Select Tags",
+                            label: "Multi Select",
                             ...formItemLayout
                             }} />                        
                     <Field
@@ -123,7 +159,7 @@ const simpleControls = (props) => {
                             }} />                        
                     <Field 
                         name="TextArea" 
-                        component={Input}
+                        component={TextArea}
                         formItem={{
                             label: "Text Area",
                             ...formItemLayout

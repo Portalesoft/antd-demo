@@ -1,0 +1,1 @@
+export const likeMatch = (input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0;

@@ -7,8 +7,11 @@ import { Input, Select, Checkbox } from '../../components/UI/AntDesign';
 import Form from '../../components/Forms/Form/Form';
 
 import * as normalize from '../../components/Forms/Utility/Normalize';
+import * as filter from '../../components/Forms/Utility/Filter';
 import * as actions from '../../store/actions';
 import './Register.css'
+
+const FormItem = AntForm.Item;
 
 class Register extends Component {
     
@@ -114,7 +117,7 @@ class Register extends Component {
                     showSearch
                     style={{ width: 200 }}
                     optionFilterProp="children"
-                    filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                    filterOption={filter.likeMatch}
                     validate={required()}
                     options={offices} 
                     formItem={{
@@ -147,10 +150,10 @@ class Register extends Component {
                     formItem={{
                         ...tailFormItemLayout                                                    
                     }} />
-                <AntForm.Item {...tailFormItemLayout}>
+                <FormItem {...tailFormItemLayout}>
                     <Button type="primary" htmlType="submit" style={{marginRight: '10px'}}>Register</Button>
                     <a onClick={this.props.onLoginHandler}>Back to Login</a>
-                </AntForm.Item>                        
+                </FormItem>                        
             </Form>
         );
     }
