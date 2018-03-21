@@ -21,37 +21,29 @@ class RangePicker extends Component {
 
     }
 
-    calculateValues = (previousValues, format) => {
+    shouldComponentUpdate(nextProps, nextState) {
 
-        // Null string or empty array, this will happen with no initial value
-        if (previousValues.length === 0) {
-            return null;
-        }
-
-        // String value, which will indicate either left or right hand side of the clicked range control value
-        if (typeof previousValues === 'string') {
-            return this.state.previousValues;
-        }
-
-        // Normal value processing, format the redux string values to moments
-        return [moment(previousValues[0], format), moment(previousValues[1], format)];
+        // Ignore the redux resets when the range drop down is clicked
+        return (typeof nextProps.input.value !== 'string' || 
+               (typeof nextProps.input.value === 'string' && nextProps.input.value.length === 0));
     }
 
-    render() {
+    render () {
 
         const { input, style, placeholder, showTime } = this.props;
         const format = showTime ? 'MMM DD YYYY HH:mm' : 'MMM DD YYYY'
+        console.log('Render Range:', input.value);
         return (
             <DatePicker.RangePicker 
                 {...input}        
                 style={style} 
-                value={this.calculateValues(input.value, format)}
+                value={input.value.length === 0 ? null : [moment(input.value[0], format), moment(input.value[1], format)]}
                 format={format}
                 showTime={showTime}
                 placeholder={placeholder} 
                 onChange={(e) => {
                     this.updatePreviousValues(e);
-                    input.onBlur(e);
+                    input.onChange(e);
                 }} />
         );
         
