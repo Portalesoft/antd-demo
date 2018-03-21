@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Cascader as AntCascader } from 'antd';
+
+import isEqual from 'lodash/isEqual';
 import withFormItem from '../hoc/withFormItem/withFormItem';
 
 import './Styles/Controls.css';
@@ -17,14 +19,6 @@ class Cascader extends Component {
         // and calls into the render method with an empty string. In this instance we will need to use the previous
         // values to ensure we don't lose the correct state
         this.setState({previousValues: e});
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-        // Ignore the redux resets when the cascader drop down is clicked
-        return nextProps.input.value !== this.state.previousValues && 
-               nextProps.input.value.length >= this.state.previousValues.length;
 
     }
 
