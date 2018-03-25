@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createSagaMiddleware from 'redux-saga';
+import rootSaga from './store/sagas';
 import { applyValidators } from './components/Forms/Utility/Validator';
-import { watchLogin, watchRegister, watchDashboard } from './store/sagas';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -24,9 +24,7 @@ const store = createStore(reducers, composeEnhancers(
 ));
 
 // Saga action watchers
-sagaMiddleware.run(watchLogin);
-sagaMiddleware.run(watchRegister);
-sagaMiddleware.run(watchDashboard);
+sagaMiddleware.run(rootSaga);
 
 // Attempting to force an app reload due to the index hash changing doesn't work when the
 // service worker intercepts the request and loads a previous version of the app!

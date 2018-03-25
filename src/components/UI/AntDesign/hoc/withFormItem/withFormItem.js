@@ -9,19 +9,23 @@ const formatMessage = (label, name, message) => {
     return null;
 }
 
-const checkFieldStatus = (name, label, touched, error, warning) => {
+const checkFieldStatus = (name, label, asyncValidating, touched, error, warning) => {
     let validateStatus = touched ? "success" : null;
     let help = null;
-    if (touched) {
-        if (error) {
-            validateStatus = "error";
-            help = formatMessage(label, name, error);
-        } else if (warning) {
-            validateStatus = "warning";
-            help = formatMessage(label, name, warning);                
-        } 
+    if (asyncValidating) {
+        validateStatus = "validating";
+    } else {
+        if (touched) {
+            if (error) {
+                validateStatus = "error";
+                help = formatMessage(label, name, error);
+            } else if (warning) {
+                validateStatus = "warning";
+                help = formatMessage(label, name, warning);                
+            } 
+        }    
     }
-    return { validateStatus: validateStatus, help: help };
+    return { validateStatus, help };
 }
 
 const formItemLabel = (label, tooltip) => {
@@ -45,10 +49,9 @@ const withFormItem = (FormField) => {
 
         let control = <FormField {...props} />;
         if (props.formItem) {
-
-            const { className, label, tooltip, labelCol, wrapperCol, hasFeedback } = props.formItem || {};
-            const { touched, error, warning } = props.meta || {};
-            const { validateStatus, help } = checkFieldStatus(props.input.name, label, touched, error, warning) || {};
+            const { className, label, tooltip, labelCol, wrapperCol, hasFeedback, extra } = props.formItem || {};
+            const { asyncValidating, touched, error, warning } = props.meta || {};
+            const { validateStatus, help } = checkFieldStatus(props.input.name, label, asyncValidating, touched, error, warning) || {};
             const fieldLabel = formItemLabel(label, tooltip);
             control = 
                 <Form.Item
@@ -56,6 +59,7 @@ const withFormItem = (FormField) => {
                     label={fieldLabel}
                     validateStatus={validateStatus}
                     help={help}
+                    extra={extra}
                     hasFeedback={hasFeedback}
                     labelCol={labelCol}
                     wrapperCol={wrapperCol}>
@@ -75,6 +79,7 @@ withFormItem.propTypes = {
         label: PropTypes.string,
         labelCol: PropTypes.object,
         wrapperCol: PropTypes.object,
+        extra: PropTypes.string,
         tooltip: PropTypes.shape({
             title: PropTypes.string.isRequired,
             icon: PropTypes.string.isRequired

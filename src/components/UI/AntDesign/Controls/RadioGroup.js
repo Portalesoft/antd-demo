@@ -7,14 +7,13 @@ import './Styles/Controls.css';
 
 const radioGroup = ({
     input,
-    style,
-    radios,
     formItem,
-    meta
+    radios,
+    ...custom
 }) => (
     <Radio.Group
         {...input}                 
-        style={style} 
+        {...custom}
         value={input.value}>
             {radios.map(radio => 
                 <Radio 
@@ -27,10 +26,7 @@ const radioGroup = ({
 );
 
 
-radioGroup.defaultProps = {};
 radioGroup.propTypes = {
-    input: PropTypes.object.isRequired,
-    style: PropTypes.object,
     radios: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.number.isRequired,

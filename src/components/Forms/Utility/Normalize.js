@@ -28,6 +28,25 @@ export const toDecimal = (precision) =>
         }
         return value;
     }    
+export const maxLength = (length) => 
+    (value, previousValue, allValues) => {
+        return value.length > length ? previousValue : value;
+}    
 export const lessThan = otherField => (value, previousValue, allValues) => value < allValues[otherField] ? value : previousValue;
 export const greaterThan = otherField => (value, previousValue, allValues) => value > allValues[otherField] ? value : previousValue;
+export const normalizeAll = (normalizers) => {
+    return function(value , previousValue , allValues , previousAllValues) { 
+        var i = 0;
+        var normalizersLength = normalizers.length;
+        var currentValue = value;
+        while(i < normalizersLength) {
+            var currentNormalizer = normalizers[i];
+            if(typeof currentNormalizer === "function") {
+                currentValue = currentNormalizer(currentValue ,previousValue , allValues , previousAllValues);
+            }
+            i++;
+        }
+        return currentValue;
+    }
+}
 

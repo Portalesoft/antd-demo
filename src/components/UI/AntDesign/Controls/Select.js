@@ -7,25 +7,15 @@ import './Styles/Controls.css';
 
 const select = ({
     input,
-    style,
-    mode,
-    placeholder,
-    showSearch,
-    optionFilterProp,
-    filterOption,
-    options,
     formItem,
-    meta
+    options,
+    ...custom
 }) => (
     <Select
         {...input} 
-        style={style}
-        mode={mode}
-        placeholder={placeholder} 
-        showSearch={showSearch}
-        optionFilterProp={optionFilterProp}
-        value={input.value === '' && (mode === 'multiple' || mode === 'tags') ? [] : input.value}
-        filterOption={filterOption}>
+        {...custom}
+        disabled={custom.disabled || custom.meta.asyncValidating}
+        value={input.value === '' && (custom.mode === 'multiple' || custom.mode === 'tags') ? [] : input.value}>
             {options.map(option => 
                 <Select.Option 
                     key={option.value} 
@@ -36,18 +26,7 @@ const select = ({
     </Select>
 );
 
-select.defaultProps = {
-    mode: 'default'
-};
-
 select.propTypes = {
-    input: PropTypes.object.isRequired,
-    style: PropTypes.object,
-    mode: PropTypes.oneOf(['default', 'multiple', 'tags', 'combobox']),
-    placeholder: PropTypes.string,
-    showSearch: PropTypes.bool,
-    optionFilterProp: PropTypes.string,
-    filterOption: PropTypes.func,
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.oneOfType([

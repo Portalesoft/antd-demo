@@ -172,7 +172,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onRegister: (email, password) => dispatch(actions.registerUser(email, password))
     };
-  };
+};
 
 const validate = (values) => {
     const errors = {};

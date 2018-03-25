@@ -7,15 +7,10 @@ import './Styles/Controls.css';
 
 const input = ({
     input,
-    type,
-    style,
-    icon,
-    placeholder,
-    addonBefore,
-    addonAfter,
-    formatOnBlur,
     formItem,
-    meta
+    formatOnBlur,
+    icon,
+    ...custom
 }) => {
 
     let prefix = null;
@@ -23,48 +18,26 @@ const input = ({
         prefix = <Icon type={icon} style={{ color: 'rgba(0,0,0,.25)' }} />
     }
 
-    let control = 
+    return (
         <Input
             {...input} 
-            type={type} 
-            style={style}
-            placeholder={placeholder} 
-            prefix={prefix} 
-            addonBefore={addonBefore} 
-            addonAfter={addonAfter} />
-
-    if (formatOnBlur) {
-        control =
-            <Input
-                {...input} 
-                type={type} 
-                style={style}
-                placeholder={placeholder} 
-                prefix={prefix} 
-                addonBefore={addonBefore} 
-                addonAfter={addonAfter} 
-                onBlur={(e) => {
-                    formatOnBlur(e);
-                    input.onBlur(e);
-                }} />
-    }
-
-    return control;
-
+            {...custom}
+            disabled={custom.disabled || custom.meta.asyncValidating}
+            prefix={prefix}
+            onBlur={(e) => {
+                formatOnBlur(e);
+                input.onBlur(e);
+            }} />
+    );
 }
 
 input.defaultProps = {
+    formatOnBlur: () => {},
     placeholder: null
 };
 
 input.propTypes = {
-    input: PropTypes.object.isRequired,
-    type: PropTypes.string,
-    style: PropTypes.object,
-    placeholder: PropTypes.string,
     icon: PropTypes.string,
-    addonBefore: PropTypes.object,
-    addonAfter: PropTypes.object,
     formatOnBlur: PropTypes.func
 };
 

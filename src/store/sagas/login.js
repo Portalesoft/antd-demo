@@ -1,8 +1,10 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import axios from '../../config/axios-authentication';
-import * as actions from '../actions';
 
-export function* loginSaga(action) { 
+import * as actions from '../actions';
+import * as actionTypes from '../actions/actionTypes';
+
+function* loginSaga(action) { 
 
     // Initiate the login process
     yield put(actions.loginStart());
@@ -36,7 +38,7 @@ export function* loginSaga(action) {
 
 }
 
-export function* loginCheckStatusSaga(action) {
+function* loginCheckStatusSaga(action) {
 
     const token = yield localStorage.getItem('token');
     if (!token) {
@@ -54,9 +56,15 @@ export function* loginCheckStatusSaga(action) {
 
 }
 
-export function* logoutSaga(action) {
+function* logoutSaga(action) {
     yield call([localStorage, 'removeItem'], "token");
     yield call([localStorage, 'removeItem'], "userId");
     yield call([localStorage, 'removeItem'], "expirationDate");
     yield put (actions.logoutSuccess());    
 }
+
+export const loginSagas = [
+    takeEvery(actionTypes.LOGIN_USER, loginSaga),
+    takeEvery(actionTypes.LOGIN_CHECK_STATUS, loginCheckStatusSaga),
+    takeEvery(actionTypes.LOGOUT_USER, logoutSaga)
+];

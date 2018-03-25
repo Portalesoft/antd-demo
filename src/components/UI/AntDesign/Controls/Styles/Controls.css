@@ -1,4 +1,4 @@
-.Mandatory label:before {
+.Mandatory .ant-form-item-label:before {
     display: inline-block;
     margin-right: 4px;
     content: "*";

@@ -7,23 +7,26 @@ import './Styles/Controls.css';
 
 const checkbox = ({
     input,
-    style,
-    content,
     formItem,
-    meta
-}) => (
-    <Checkbox
-        {...input}   
-        defaultChecked={input.value !== '' ? input.value : false}              
-        style={style}>
-            {content}
-    </Checkbox>
-);
+    content,
+    ...custom
+}) => {
 
-checkbox.defaultProps = {};
+    return (
+        <Checkbox
+            {...input}   
+            {...custom}
+            checked={input.value !== '' ? input.value : false}>
+                {content}
+        </Checkbox>
+    );
+};
+    
+checkbox.defaultProps = {
+    content: null
+};
+
 checkbox.propTypes = {
-    input: PropTypes.object.isRequired,
-    style: PropTypes.object,
     content: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object

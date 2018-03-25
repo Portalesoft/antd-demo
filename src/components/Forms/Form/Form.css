@@ -23,7 +23,11 @@
 }
 
 .Form .ant-form-item {
-    margin-bottom: 0;
+    margin-bottom: 5px;
+}
+
+.Form .ant-form-extra {
+    padding-top: 0px;
 }
 
 @media (max-width: 576px) {

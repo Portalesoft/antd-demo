@@ -1,8 +1,10 @@
-import { put, call } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 import axios from '../../config/axios-authentication';
-import * as actions from '../actions';
 
-export function* registerSaga(action) { 
+import * as actions from '../actions';
+import * as actionTypes from '../actions/actionTypes';
+
+function* registerSaga(action) { 
 
     // Initiate the login process
     yield put(actions.loginStart());
@@ -30,3 +32,7 @@ export function* registerSaga(action) {
     } 
 
 }
+
+export const registerSagas = [
+    takeEvery(actionTypes.REGISTER_USER, registerSaga)
+];

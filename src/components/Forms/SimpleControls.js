@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './Form/Form';
 import { Field, reduxForm } from 'redux-form';
-import { Row, Col, Icon } from 'antd';
+import { Alert, Row, Col, Icon } from 'antd';
 import { Input, Select, Checkbox, Cascader, DatePicker, TimePicker, RangePicker, Switch, RadioGroup, TextArea } from '../../components/UI/AntDesign';
 import * as normalize from './Utility/Normalize';
 import * as format from './Utility/Format';
@@ -66,6 +66,14 @@ const simpleControls = (props) => {
 
     return (
         <Form title="Simple Form Controls">
+            <Alert
+                message="Information"
+                description='The controls shown below are those currently supported in this demo, this excludes grids, lists and file upload controls which will
+                    be covered in other demos.'
+                style={{ marginBottom: '16px' }}
+                type="info"
+                closeText="Close"
+                showIcon />            
             <Row>
                 <Col span={24} md={{ span: 12 }}>
                     <Field
@@ -93,16 +101,6 @@ const simpleControls = (props) => {
                             ...formItemLayout
                             }} />
                     <Field 
-                        name="Decimal" 
-                        component={Input} 
-                        style={{ width: '60%' }}
-                        normalize={normalize.toDecimal(-1)}                        
-                        formatOnBlur={format.toDecimal(-1)}                     
-                        formItem={{
-                            label: "Decimal number",
-                            ...formItemLayout
-                            }} />
-                    <Field 
                         name="Decimal2DP" 
                         component={Input} 
                         style={{ width: '60%' }}
@@ -112,6 +110,21 @@ const simpleControls = (props) => {
                             label: "Decimal (2DP)",
                             ...formItemLayout
                             }} />                        
+                    <Field
+                        name="Combination" 
+                        component={Input} 
+                        addonBefore={
+                            <Field
+                                name="CombinationBefore"
+                                component={Select}
+                                style={{ width: 75 }} 
+                                options={areaCodes} />
+                        }
+                        addonAfter={<Icon type="setting" />}                        
+                        formItem={{
+                            label: "Combination",
+                            ...formItemLayout                                                    
+                        }} />
                     <Field 
                         name="Cascader" 
                         component={Cascader} 
@@ -148,13 +161,6 @@ const simpleControls = (props) => {
                         options={coloursList} 
                         formItem={{
                             label: "Multi Select",
-                            ...formItemLayout
-                            }} />                        
-                    <Field
-                        name="RemoteSelect" 
-                        component={Input} 
-                        formItem={{
-                            label: "Remote Select",
                             ...formItemLayout
                             }} />                        
                     <Field 
@@ -217,23 +223,9 @@ const simpleControls = (props) => {
                         component={RangePicker}
                         formItem={{
                             label: "Range",
+                            tooltip: { title: "This control doesn't work properly on mobile phone devices", icon: "info-circle-o" },
                             ...formItemLayout
                             }} />                        
-                    <Field
-                        name="Combination" 
-                        component={Input} 
-                        addonBefore={
-                            <Field
-                                name="CombinationBefore"
-                                component={Select}
-                                style={{ width: 75 }} 
-                                options={areaCodes} />
-                        }
-                        addonAfter={<Icon type="setting" />}                        
-                        formItem={{
-                            label: "Combination",
-                            ...formItemLayout                                                    
-                        }} />
                     <Field 
                         name="Checkbox" 
                         component={Checkbox} 
