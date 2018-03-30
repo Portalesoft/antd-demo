@@ -15,7 +15,8 @@ const select = ({
         {...input} 
         {...custom}
         disabled={custom.disabled || custom.meta.asyncValidating}
-        value={input.value === '' && (custom.mode === 'multiple' || custom.mode === 'tags') ? [] : input.value}>
+        value={(input.value === '' && (custom.mode === 'multiple' || custom.mode === 'tags') ? [] : 
+               (input.value === '' && (custom.mode !== 'multiple' && custom.mode !== 'tags') ? undefined : input.value ))}>
             {options.map(option => 
                 <Select.Option 
                     key={option.value} 

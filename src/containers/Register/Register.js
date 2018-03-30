@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { required, email } from 'redux-form-validators'
 import { Form as AntForm, Button, Alert } from 'antd';
-import { Input, Select, Checkbox } from '../../components/UI/AntDesign';
+import { Input, Select, Checkbox, formItemLayout, tailFormItemLayout } from '../../components/UI/AntDesign';
 import Form from '../../components/Forms/Form/Form';
 
 import * as normalize from '../../components/Forms/Utility/Normalize';
@@ -21,30 +21,6 @@ class Register extends Component {
     }
 
     render() {
-
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 8 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
-            }
-        };
-  
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0,
-                },
-                sm: {
-                    span: 16,
-                    offset: 8,
-                },
-            }
-        };
 
         const offices = [
             {value: 'langley', text: 'Langley'},

@@ -4,10 +4,10 @@ import Cascader from './Controls/Cascader';
 import Checkbox from './Controls/Checkbox';
 import DatePicker from './Controls/DatePicker';
 import TimePicker from './Controls/TimePicker';
-import RangePicker from './Controls/RangePicker';
 import RadioGroup from './Controls/RadioGroup';
 import TextArea from './Controls/TextArea';
 import Switch from './Controls/Switch';
+import { formItemLayout, noLabelFormItemLayout, tailFormItemLayout } from './Layout/Layout';
 
 export {
     Input, 
@@ -16,9 +16,11 @@ export {
     Checkbox,
     DatePicker,
     TimePicker,
-    RangePicker,
     RadioGroup,
     TextArea,
-    Switch
+    Switch,
+    formItemLayout,
+    noLabelFormItemLayout,
+    tailFormItemLayout
 }
 

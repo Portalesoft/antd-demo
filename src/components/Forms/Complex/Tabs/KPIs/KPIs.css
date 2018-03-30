@@ -1,0 +1,8 @@
+.KPIs {
+    padding: 16px;
+}
+
+.KPIs .Controls {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,15 @@
+.Contacts .ant-form-item,
+.Contacts .ant-form-item-control-wrapper {
+    padding-right: 4px;
+}
+
+.Contact {
+    padding: 8px 4px 4px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    margin-bottom: 8px;
+}
+
+.Contact .ant-calendar-picker {
+    width: 100%;
+}

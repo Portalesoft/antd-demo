@@ -24,7 +24,7 @@ class App extends Component {
 
     return (
       <Aux>
-        <AutoReload title="React Ant Design Demo" url="/index.html" tryDelay={1 * 10 * 1000} />
+        <AutoReload title="React Ant Design Demo" application="react-antd-demo" url="/index.html" tryDelay={1 * 10 * 1000} />
         {template}
       </Aux>
     );

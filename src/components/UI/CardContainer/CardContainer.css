@@ -1,0 +1,46 @@
+.CardContainer {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 3px 3px 0px 0px;
+}
+
+.CardContainer > .ant-tabs-card > .ant-tabs-content {
+  margin-top: -16px; 
+}
+
+.CardContainer > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+}
+
+.CardContainer > .ant-tabs-card > .ant-tabs-bar {
+  border-color: #fff;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.CardContainer > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  border-color: #EDF5FF;
+  background: #EDF5FF;
+}
+
+.CardContainer > .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  border-color: steelblue;
+  background: steelblue;
+  color: white;
+  padding-bottom: 0;
+}
+
+.CardContainer .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  line-height: 12px;
+  font-weight: 500;
+  color: #656b6f;
+  background-color: #ECEFF1;
+}
+
+.CardContainer .ant-collapse {
+  border-radius: none;
+  border: none;
+}
+
+.CardContainer .ant-collapse > .ant-collapse-item:last-child, 
+.CardContainer .ant-collapse > .ant-collapse-item:last-child > .ant-collapse-header {
+  border-radius: none;
+}

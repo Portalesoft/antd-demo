@@ -5,7 +5,7 @@ import { Field, reduxForm, formValues } from 'redux-form';
 import { required, length } from 'redux-form-validators'
 import { isMoment } from 'moment';
 import { Alert, Row, Col, Button, Divider, Modal, message, Form as AntForm } from 'antd';
-import { Input, Checkbox, Select, DatePicker } from '../../components/UI/AntDesign';
+import { Input, Checkbox, Select, DatePicker, formItemLayout } from '../../components/UI/AntDesign';
 
 import * as actions from '../../store/actions';
 import * as normalize from './Utility/Normalize';
@@ -48,16 +48,6 @@ class Validation extends Component {
     render () {
 
         const { handleSubmit, pristine, reset, submitting, asyncValidating, validationError, isLoading } = this.props;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 8 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 16 },
-            }
-        };
     
         const offices = [
             {value: 'langley', text: 'Langley'},
@@ -72,8 +62,7 @@ class Validation extends Component {
                 onSubmitHandler={handleSubmit(this.submitHandler)}>
                 <Alert
                     message="Information"
-                    description="Initialise will populate the form with an initial set of values to simulate data from the server. Undo changes will reset all user changes to blank values or the initial
-                        values once they have been loaded. All operations use an additional one second delay to simulate network activity."
+                    description="Initialise will populate the form with an initial set of values to simulate data from the server. Undo changes will reset all user changes to blank values or the initial values once they have been loaded. All operations use an additional one second delay to simulate network activity."
                     style={{ marginBottom: '16px' }}
                     type="info"
                     closeText="Close"
@@ -155,7 +144,7 @@ class Validation extends Component {
                             label="Enabled"
                             className={ this.props.isEnabled ? "Mandatory" : null }
                             extra={ this.props.isEnabled ? null : "Enabled and required if ticked" }>
-                            <div style={{ display: 'flex' }}>
+                            <div style={{ display: 'inline-flex' }}>
                                 <Field
                                     name="CombinedEnable"
                                     component={Checkbox} />

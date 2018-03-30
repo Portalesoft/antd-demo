@@ -12,7 +12,7 @@ const switchControl = ({
     <Switch
         {...input}
         {...custom}                 
-        defaultChecked={input.value !== '' ? input.value : false} />
+        checked={input.value !== '' ? input.value : false} />
 );
 
 export default withFormItem(switchControl);

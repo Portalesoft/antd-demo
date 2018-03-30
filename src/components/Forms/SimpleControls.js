@@ -2,23 +2,12 @@ import React from 'react';
 import Form from './Form/Form';
 import { Field, reduxForm } from 'redux-form';
 import { Alert, Row, Col, Icon } from 'antd';
-import { Input, Select, Checkbox, Cascader, DatePicker, TimePicker, RangePicker, Switch, RadioGroup, TextArea } from '../../components/UI/AntDesign';
+import { Input, Select, Checkbox, Cascader, DatePicker, TimePicker, Switch, RadioGroup, TextArea, formItemLayout } from '../../components/UI/AntDesign';
 import * as normalize from './Utility/Normalize';
 import * as format from './Utility/Format';
 import * as filter from './Utility/Filter';
 
 const simpleControls = (props) => {
-
-    const formItemLayout = {
-        labelCol: {
-            xs: { span: 24 },
-            sm: { span: 8 },
-        },
-        wrapperCol: {
-            xs: { span: 24 },
-            sm: { span: 16 },
-        }
-    };
 
     const cascadeList = [{ 
         value: 'red', 
@@ -68,8 +57,7 @@ const simpleControls = (props) => {
         <Form title="Simple Form Controls">
             <Alert
                 message="Information"
-                description='The controls shown below are those currently supported in this demo, this excludes grids, lists and file upload controls which will
-                    be covered in other demos.'
+                description='The controls shown below are the Ant Design input controls currently supported in this demo. Each supported control requires a wrapper class to be written, similar in concept to how Arena works in Liberty.'
                 style={{ marginBottom: '16px' }}
                 type="info"
                 closeText="Close"
@@ -100,16 +88,6 @@ const simpleControls = (props) => {
                             label: "Integer number",
                             ...formItemLayout
                             }} />
-                    <Field 
-                        name="Decimal2DP" 
-                        component={Input} 
-                        style={{ width: '60%' }}
-                        normalize={normalize.toDecimal(2)}                        
-                        formatOnBlur={format.toDecimal(2)}
-                        formItem={{
-                            label: "Decimal (2DP)",
-                            ...formItemLayout
-                            }} />                        
                     <Field
                         name="Combination" 
                         component={Input} 
@@ -181,19 +159,21 @@ const simpleControls = (props) => {
                             ...formItemLayout
                             }} />                        
                     <Field 
-                        name="Lowercase" 
-                        component={Input} 
-                        normalize={normalize.toLowerCase}
-                        formItem={{
-                            label: "Lowercase",
-                            ...formItemLayout
-                            }} />                        
-                    <Field 
                         name="Alphabetic" 
                         component={Input} 
                         normalize={normalize.toAlphabetic}
                         formItem={{
                             label: "Alphabetic",
+                            ...formItemLayout
+                            }} />                        
+                    <Field 
+                        name="Decimal2DP" 
+                        component={Input} 
+                        style={{ width: '60%' }}
+                        normalize={normalize.toDecimal(2)}                        
+                        formatOnBlur={format.toDecimal(2)}
+                        formItem={{
+                            label: "Decimal (2DP)",
                             ...formItemLayout
                             }} />                        
                     <Field 
@@ -216,14 +196,6 @@ const simpleControls = (props) => {
                         component={TimePicker}
                         formItem={{
                             label: "Time",
-                            ...formItemLayout
-                            }} />                        
-                    <Field
-                        name="Range" 
-                        component={RangePicker}
-                        formItem={{
-                            label: "Range",
-                            tooltip: { title: "This control doesn't work properly on mobile phone devices", icon: "info-circle-o" },
                             ...formItemLayout
                             }} />                        
                     <Field 

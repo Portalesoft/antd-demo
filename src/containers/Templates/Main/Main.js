@@ -5,14 +5,15 @@ import { Layout } from 'antd';
 import SideMenu from '../../../components/Navigation/SideMenu/SideMenu';
 import Dashboard from '../../../containers/Dashboard/Dashboard';
 import Toolbar from '../../../components/Navigation/Toolbar/Toolbar';
-import Accordions from '../../../components/Forms/Accordions';
-import FieldArrays from '../../../components/Forms/FieldArrays';
-import Grids from '../../../components/Forms/Grids';
 import SimpleControls from '../../../components/Forms/SimpleControls';
-import TabPanels from '../../../components/Forms/TabPanels';
 import Validation from '../../../components/Forms/Validation';
+import Complex from '../../../components/Forms/Complex/Complex';
+import Tables from '../../../components/Forms/Tables';
+import Support from '../../../components/UI/Support/Support';
+
 import * as menuIds from '../../../components/Navigation/menuids';
 import * as actions from '../../../store/actions';
+
 import './Main.css';
 
 const { Header, Content } = Layout;
@@ -47,13 +48,12 @@ class Main extends Component {
                         <Toolbar title="React Ant Design Demo" menuHandler={this.onClickMenuHandler}/>
                     </Header>                            
                     <Content style={{ overflow: 'auto' }}>
+                        <Support />
                         <Switch>
-                            <Route path="/accordions" component={Accordions} />
-                            <Route path="/fieldarrays" component={FieldArrays} />
-                            <Route path="/grids" component={Grids} />
                             <Route path="/simplecontrols" component={SimpleControls} />
-                            <Route path="/tabpanels" component={TabPanels} />
                             <Route path="/validation" component={Validation} />
+                            <Route path="/complex" component={Complex} />
+                            <Route path="/tables" component={Tables} />
                             <Route path="/" exact component={Dashboard} />
                             <Redirect to="/" />
                         </Switch>                        
