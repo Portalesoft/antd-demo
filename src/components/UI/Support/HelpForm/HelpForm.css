@@ -1,0 +1,32 @@
+.HelpForm .ant-modal {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    position: fixed;
+    top: auto;
+    padding-bottom: 0;
+    bottom: 10px;
+    right: 10px; 
+}
+
+.HelpForm .ant-modal-header {
+    font-size: 16px;
+    background-color: #2969b0;
+    font-weight: 500;
+    padding: 16px;
+}
+
+.HelpForm .ant-modal-title,
+.HelpForm .ant-modal-close-x:before {
+    color: white;
+}
+
+.HelpForm .ant-modal-body {
+    padding: 8px 20px 24px;
+}
+
+.HelpForm .ant-form-item {
+    margin-bottom: 4px;
+}
+
+.HelpForm .ant-form-item-control {
+    line-height: 1;
+}

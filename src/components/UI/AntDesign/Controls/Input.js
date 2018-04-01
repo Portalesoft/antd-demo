@@ -1,44 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Icon, Input } from 'antd';
+import { Icon, Input as AntInput } from 'antd';
 import withFormItem from '../hoc/withFormItem/withFormItem';
 
 import './Styles/Controls.css';
 
-const input = ({
-    input,
-    formItem,
-    formatOnBlur,
-    icon,
-    ...custom
-}) => {
+class Input extends Component { 
 
-    let prefix = null;
-    if (icon) {
-        prefix = <Icon type={icon} style={{ color: 'rgba(0,0,0,.25)' }} />
+    registerControl = (control) => {
+        const { input, registerControl } = this.props;
+        if (registerControl) {
+            registerControl(input.name, control);
+        }
     }
 
-    return (
-        <Input
-            {...input} 
-            {...custom}
-            disabled={custom.disabled || custom.meta.asyncValidating}
-            prefix={prefix}
-            onBlur={(e) => {
-                formatOnBlur(e);
-                input.onBlur(e);
-            }} />
-    );
+    render () {
+
+        const { input, formItem, registerControl, formatOnBlur, icon, ...custom } = this.props;
+        let prefix = null;
+        if (icon) {
+            prefix = <Icon type={icon} style={{ color: 'rgba(0,0,0,.25)' }} />
+        }
+
+        return (
+            <AntInput
+                {...input} 
+                {...custom}
+                disabled={custom.disabled || custom.meta.asyncValidating}
+                ref={input => this.registerControl(input)}
+                prefix={prefix}
+                onBlur={(e) => {
+                    formatOnBlur(e);
+                    input.onBlur(e);
+                }} />
+        );
+
+    }
+
 }
 
-input.defaultProps = {
+Input.defaultProps = {
     formatOnBlur: () => {},
     placeholder: null
 };
 
-input.propTypes = {
+Input.propTypes = {
     icon: PropTypes.string,
-    formatOnBlur: PropTypes.func
+    formatOnBlur: PropTypes.func,
+    registerControl: PropTypes.func
 };
 
-export default withFormItem(input);
+export default withFormItem(Input);

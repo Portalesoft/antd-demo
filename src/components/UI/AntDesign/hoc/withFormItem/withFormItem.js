@@ -49,20 +49,16 @@ const withFormItem = (FormField) => {
 
         let control = <FormField {...props} />;
         if (props.formItem) {
-            const { className, label, tooltip, labelCol, wrapperCol, hasFeedback, extra } = props.formItem || {};
+            const { label, tooltip, ...custom } = props.formItem || {};
             const { asyncValidating, touched, error, warning } = props.meta || {};
             const { validateStatus, help } = checkFieldStatus(props.input.name, label, asyncValidating, touched, error, warning) || {};
             const fieldLabel = formItemLabel(label, tooltip);
             control = 
                 <Form.Item
-                    className={className}
                     label={fieldLabel}
                     validateStatus={validateStatus}
                     help={help}
-                    extra={extra}
-                    hasFeedback={hasFeedback}
-                    labelCol={labelCol}
-                    wrapperCol={wrapperCol}>
+                    {...custom}>
                         {control}
                 </Form.Item>
         }

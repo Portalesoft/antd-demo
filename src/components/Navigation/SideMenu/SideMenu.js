@@ -48,10 +48,6 @@ const sideMenu = (props) => {
                         <Menu.Item key="11"><NavLink to='/simplecontrols'>Simple Controls</NavLink></Menu.Item>
                         <Menu.Item key="12"><NavLink to='/validation'>Validation</NavLink></Menu.Item>
                         <Menu.Item key="13"><NavLink to='/complex'>Complex</NavLink></Menu.Item>
-                        <Menu.Item key="16"><NavLink to='/tables'>Tables</NavLink></Menu.Item>
-                    </SubMenu>
-                    <SubMenu key="graphql" title={<span><Icon type="global" /><span>Graph QL</span></span>}>
-                        <Menu.Item key="21">TO DO</Menu.Item>
                     </SubMenu>
             </Menu>
         </Sider>

@@ -8,8 +8,7 @@ import Toolbar from '../../../components/Navigation/Toolbar/Toolbar';
 import SimpleControls from '../../../components/Forms/SimpleControls';
 import Validation from '../../../components/Forms/Validation';
 import Complex from '../../../components/Forms/Complex/Complex';
-import Tables from '../../../components/Forms/Tables';
-import Support from '../../../components/UI/Support/Support';
+import HelpButton from '../../../components/UI/Support/HelpButton/HelpButton';
 
 import * as menuIds from '../../../components/Navigation/menuids';
 import * as actions from '../../../store/actions';
@@ -48,12 +47,11 @@ class Main extends Component {
                         <Toolbar title="React Ant Design Demo" menuHandler={this.onClickMenuHandler}/>
                     </Header>                            
                     <Content style={{ overflow: 'auto' }}>
-                        <Support />
+                        <HelpButton />
                         <Switch>
                             <Route path="/simplecontrols" component={SimpleControls} />
                             <Route path="/validation" component={Validation} />
                             <Route path="/complex" component={Complex} />
-                            <Route path="/tables" component={Tables} />
                             <Route path="/" exact component={Dashboard} />
                             <Redirect to="/" />
                         </Switch>                        

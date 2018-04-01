@@ -26,9 +26,6 @@ class Complex extends Component {
                                 <KPIs />
                             </FormSection>
                         </TabPane>
-                        <TabPane tab="Documents" key="3">
-                            Content of Tab Pane 3
-                        </TabPane>
                     </Tabs>
                 </CardContainer>
             </Form>

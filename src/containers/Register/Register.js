@@ -158,7 +158,7 @@ const validate = (values) => {
     return errors;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
+const connectedReduxForm = reduxForm({ 
     form: 'register',
     validate,
     initialValues: {
@@ -166,4 +166,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
         Office: "langley"
     },
     enableReinitialize: true
-})(Register));
+})(Register);
+
+export default connect(mapStateToProps, mapDispatchToProps)(connectedReduxForm);

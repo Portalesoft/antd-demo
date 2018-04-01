@@ -73,4 +73,8 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({form: 'login'})(Login));
+const connectedReduxForm = reduxForm({ 
+    form: 'login' 
+})(Login)
+
+export default connect(mapStateToProps, mapDispatchToProps)(connectedReduxForm);

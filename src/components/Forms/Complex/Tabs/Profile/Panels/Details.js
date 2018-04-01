@@ -3,6 +3,9 @@ import { Row, Col } from 'antd';
 import { Field } from 'redux-form';
 import { Input, Select, formItemLayout } from '../../../../../UI/AntDesign';
 
+import * as normalize from '../../../../Utility/Normalize';
+import * as format from '../../../../Utility/Format';
+
 const details = (props) => {
 
     return (
@@ -89,12 +92,18 @@ const details = (props) => {
                 <Field
                     name="ProfitLoss" 
                     component={Input} 
+                    addonBefore={<span>£</span>}                
+                    normalize={normalize.toDecimal(2)}                        
+                    formatOnBlur={format.toDecimal(2)}            
                     formItem={{
                         label: "Profit / Loss",
                         ...formItemLayout
                     }} />
                 <Field
                     name="Turnover" 
+                    addonBefore={<span>£</span>}                
+                    normalize={normalize.toDecimal(2)}                        
+                    formatOnBlur={format.toDecimal(2)}
                     component={Input} 
                     formItem={{
                         label: "Turnover",
