@@ -16,7 +16,7 @@ class Complex extends Component {
             <Form title="Supplier">      
                 <Alert
                     message="Information"
-                    description="Examples of accordions and tab panels with responsive form designs. The Contacts panel and KPIs tab show alternative solutions to in place editting of grid based data."
+                    description="Examples of accordions and tab panels with responsive form designs. The Contacts panel and KPIs tab show alternative solutions to in place editting of grid based data. The KPIs section is a prototype and has not been fully implemented."
                     style={{ marginBottom: '16px' }}
                     type="info"
                     closeText="Close"
