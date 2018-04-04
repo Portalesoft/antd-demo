@@ -7,7 +7,7 @@ import TimePicker from './Controls/TimePicker';
 import RadioGroup from './Controls/RadioGroup';
 import TextArea from './Controls/TextArea';
 import Switch from './Controls/Switch';
-import { formItemLayout, noLabelFormItemLayout, tailFormItemLayout } from './Layout/Layout';
+import { formItemLayout, noLabelFormItemLayout, tailFormItemLayout, singleColumnFormItemLayout, singleColumnNoLabelFormItemLayout } from './Layout/Layout';
 
 export {
     Input, 
@@ -21,6 +21,8 @@ export {
     Switch,
     formItemLayout,
     noLabelFormItemLayout,
-    tailFormItemLayout
+    tailFormItemLayout,
+    singleColumnFormItemLayout,
+    singleColumnNoLabelFormItemLayout
 }
 

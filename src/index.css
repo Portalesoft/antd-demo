@@ -13,3 +13,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
+.ant-form-item, .ant-form-item-control {
+    /* height: 40px; */
+}
